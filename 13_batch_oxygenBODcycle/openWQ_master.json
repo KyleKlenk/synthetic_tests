@@ -30,7 +30,7 @@
 	"OPENWQ_OUTPUT": {
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
         "FORMAT": "HDF5", // HDF5, CSV
-        "CHEMICAL_SPECIES":["BOD","DEFICIT_DO","DO"],
+        "CHEMICAL_SPECIES":["BOD","DEFICIT_OXYG","DO"],
 		"UNITS":"kg",
 		"COMPARTMENTS_AND_CELLS": {
 			"SOIL_RECHR": {

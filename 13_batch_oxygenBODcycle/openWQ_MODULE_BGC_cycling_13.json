@@ -20,16 +20,16 @@
                 "KINETICS_PER_DAY": "BOD * k",
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
-                    "k": 0.03
+                    "k": 0.1
                 }
             },
             "2":{
                 "CONSUMED": "DEFICIT_OXYG",
                 "PRODUCED": "DO",
-                "KINETICS_PER_DAY": "DEFICIT_DO * p",
+                "KINETICS_PER_DAY": "DEFICIT_OXYG * p",
                 "PARAMETER_NAMES": ["p"],
                 "PARAMETER_VALUES":{
-                    "p": 0.01
+                    "p": 0.5
                 }
             }
         }
