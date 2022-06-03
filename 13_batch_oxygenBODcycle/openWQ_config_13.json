@@ -1,0 +1,15 @@
+{
+    
+    "BIOGEOCHEMISTRY_CONFIGURATION":{
+
+        "SOIL_RECHR":{
+            "CYCLING_FRAMEWORK": ["BGQcycle_13"],
+            "INITIAL_CONDITIONS":{
+                "BOD": [10,"kg"],
+                "DEFICIT_DO": [0,"kg"],
+                "DO": [0,"kg"]
+            }
+        }
+
+    } 
+}
