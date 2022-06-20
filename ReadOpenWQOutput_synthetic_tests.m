@@ -1,9 +1,9 @@
 
 % Read project results: HDF5
 
-% Tests possible = [9, 10, 11, 12, 13];
+% Tests possible = [9, 10, 11, 11.1 12, 13];
 ExtrVisData = true;
-test = 13;
+test = 12;
 
 outputFolder = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/Synthetic_Tests/Analytical_solutions/openWQ_results";
 
@@ -33,6 +33,25 @@ elseif test == 11
         'SOIL_RECHR@SPECIES_A#KG',[1,1,1];...
         'SOIL_RECHR@SPECIES_B#KG',[1,1,1];...
         };
+    
+elseif test == 11.1
+    Synthetic_test = '11_1_batch_3species';
+
+    extractElm_info = {...
+        'SOIL_RECHR@SPECIES_A#KG',[1,1,1];...
+        'SOIL_RECHR@SPECIES_B#KG',[1,1,1];...
+        'SOIL_RECHR@SPECIES_C#KG',[1,1,1];...
+        };
+
+elseif test == 12
+    Synthetic_test = '12_batch_nitrogencycle';
+
+    extractElm_info = {...
+        'SOIL_RECHR@Nref#KG',[1,1,1];...
+        'SOIL_RECHR@Nlab#KG',[1,1,1];...
+        'SOIL_RECHR@DON#KG',[1,1,1];...
+        'SOIL_RECHR@DIN#KG',[1,1,1]
+        };    
     
 elseif test == 13
     Synthetic_test = '13_batch_oxygenBODcycle';
