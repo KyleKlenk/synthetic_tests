@@ -5,7 +5,7 @@
 ExtrVisData = true;
 test = 12;
 
-outputFolder = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/Synthetic_Tests/Analytical_solutions/openWQ_results";
+outputFolder = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/apply/Case_Studies/synthetic_tests/99_analytical_solutions/openWQ_results";
 
 if test == 9
     Synthetic_test = '9_batch_singleSp_1storder';
