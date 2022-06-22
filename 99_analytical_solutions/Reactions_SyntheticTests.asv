@@ -383,6 +383,13 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
     conc_DON_analytical = zeros(tsim, 1);
     conc_DIN_analytical = zeros(tsim, 1);
     
+    conc_Nref_numerical = zeros(tsim, 1);
+    conc_Nlab_numerical = zeros(tsim, 1);
+    conc_DIN_numerical = zeros(tsim, 1);
+    conc_Nref_numerical(1) = c0_Nref;
+    conc_Nlab_numerical(1) = c0_Nlab;
+    conc_DIN_numerical(1) = c0_DIN;
+    
     % Species 1 (simple single species linear decay)
     for t = 1:tsim
         
@@ -404,16 +411,7 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
         B = exp(-k_a * ti) - exp(-k_b * ti);
         C = c0_b * exp(-k_b * ti);
         conc_Nlab_analytical(t) = A * B + C;
-        
-        % DON
-        %c0_a = c0_Nref;
-        %c0_b = c0_Nlab;
-        %k_a = dissol_1;
-        %k_b = dissol_2;
-        %conc_DON_analytical(t) = c0_DON...
-        %                        + (c0_a - conc_Nref_analytical(t))...
-        %                        + (c0_b - conc_Nlab_analytical(t));
-        
+
         c0_a = c0_Nref;
         c0_b = c0_Nlab;
         c0_c = c0_DON;
@@ -429,27 +427,60 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
         const1 = (k_a2 * c0_a) / (k_a1 + k_a2);
         const2 = (k_b2 * k_a1 * c0_a) / (k_b1 + k_b2 - k_a1) * ( (1/(k_b1 + k_b2)) - (1 / k_a1) );
         const3 = k_b2 * c0_b / (k_b1 + k_b2);
-        %const = c0_c - const1 + const2 - const3;
-        const = c0_c - const1 - const2 + const3;
+        const = c0_c + const1 - const2 + const3;
         
         conc_DON_analytical(t) = A + B + C + const;
         
-        %DIN
-        c0_a = c0_Nref;
-        c0_b = c0_Nlab;
-        c0_c = c0_DIN;
-        k_a = k_degrad + dissol_1;
-        k_b = miner + dissol_2;
-        k_c = denit + plantup;
+        %DIN (as the 3 species of the 3-species chain)
+        %c0_a = c0_Nref;
+        %c0_b = c0_Nlab;
+        %c0_c = c0_DIN;
+        %k_a = k_degrad;
+        %k_b = miner + dissol_2;
+        %k_c = denit + plantup;
         
-        A = (k_a * c0_a) / (k_b  - k_a);
-        B = exp(-k_a * t) / (k_c - k_a);
-        C = exp(-k_b * t) / (k_c - k_b);
-        D = (c0_b * exp(-k_b * t)) / (k_c - k_b);
-        E = c0_c * exp(-k_c * t);
-        F = exp(-k_c * t) / (k_c - k_a);
-        G = exp(-k_c * t) / (k_c - k_b);
-        conc_DIN_analytical(t) = k_b * (A * (B - C) + D) + E - k_b * (A * (F - G) + D);
+        %A = (k_a * c0_a) / (k_b  - k_a);
+        %B = exp(-k_a * t) / (k_c - k_a);
+        %C = exp(-k_b * t) / (k_c - k_b);
+        %D = (c0_b * exp(-k_b * t)) / (k_c - k_b);
+        %E = c0_c * exp(-k_c * t);
+        %F = exp(-k_c * t) / (k_c - k_a);
+        %G = exp(-k_c * t) / (k_c - k_b);
+        %conc_DIN_analytical(t) = k_b * (A * (B - C) + D) + E - k_b * (A * (F - G) + D);
+        
+        % New derivation
+        cx0 = c0_Nref;
+        A0 = c0_Nlab;
+        ka = miner;
+        kb = denit + plantup;
+        k1 = k_degrad;
+        k2 = miner;
+        k3 = dissol_2;
+        
+        A = (ka * k1 * cx0) / (k2 + k3 - k1);
+        B = (exp(-k1 * ti)) / (kb - k1) - (exp((-k2-k3)*ti)) / (kb - k2 - k3);
+        C = (ka * A0) / (kb - k2 - k3);
+        D = exp((-k2 - k3) * ti);
+        
+        const1 = A;
+        const2 = 1 / (kb - k1) - 1 / (kb - k2 - k3);
+        const3 = C;
+        
+        const = (c0_DIN - const1 * const2 - const3;
+        
+        conc_DIN_analytical(t) = A * B + C * D + const;
+        
+        % DIN numerical
+        if t < tsim
+            conc_Nref_numerical(t + 1) = conc_Nref_numerical(t)...
+                - conc_Nref_numerical(t) * k_degrad;
+            conc_Nlab_numerical(t + 1) = conc_Nlab_numerical(t) ...
+                + conc_Nref_numerical(t) * k_degrad...
+                - conc_Nlab_numerical(t) * (miner + dissol_2);
+            conc_DIN_numerical(t + 1) = conc_DIN_numerical(t)...
+                + conc_Nlab_numerical(t) * (miner)...
+                - conc_DIN_numerical(t) * (denit + plantup);
+        end
         
     end
 
@@ -466,6 +497,19 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
     %        "Species C")
     %grid on
     
+    figure
+    subplot(1,3,1)
+    plot(conc_Nlab_numerical)
+    hold on
+    plot(conc_Nlab_analytical)
+    subplot(1,3,2)
+    plot(conc_Nref_numerical)
+    hold on
+    plot(conc_Nref_analytical)
+    subplot(1,3,3)
+    plot(conc_DIN_numerical)
+    hold on
+    plot(conc_DIN_analytical)
     
 end
 
