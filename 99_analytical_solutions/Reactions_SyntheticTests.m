@@ -497,19 +497,19 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
     %        "Species C")
     %grid on
     
-    figure
-    subplot(1,3,1)
-    plot(conc_Nlab_numerical)
-    hold on
-    plot(conc_Nlab_analytical)
-    subplot(1,3,2)
-    plot(conc_Nref_numerical)
-    hold on
-    plot(conc_Nref_analytical)
-    subplot(1,3,3)
-    plot(conc_DIN_numerical)
-    hold on
-    plot(conc_DIN_analytical)
+    %figure
+    %subplot(1,3,1)
+    %plot(conc_Nlab_numerical)
+    %hold on
+    %plot(conc_Nlab_analytical)
+    %subplot(1,3,2)
+    %plot(conc_Nref_numerical)
+    %hold on
+    %plot(conc_Nref_analytical)
+    %subplot(1,3,3)
+    %plot(conc_DIN_numerical)
+    %hold on
+    %plot(conc_DIN_analytical)
     
 end
 
