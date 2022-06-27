@@ -77,7 +77,7 @@ elseif (test == 11)
                             "Species\_B")
 
 %%%%%%%%%%%%%%%%%%%%%%%
-% Test 11
+% Test 11.1
 %%%%%%%%%%%%%%%%%%%%%%%
 elseif (test == 11.1)
     
@@ -471,15 +471,15 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
         conc_DIN_analytical(t) = A * B + C * D + E;
         
         % DIN numerical
-        if t < tsim
-            conc_Nref_numerical(t + 1) = conc_Nref_numerical(t)...
-                - conc_Nref_numerical(t) * k_degrad;
-            conc_Nlab_numerical(t + 1) = conc_Nlab_numerical(t) ...
-                + conc_Nref_numerical(t) * k_degrad...
-                - conc_Nlab_numerical(t) * (miner + dissol_2);
-            conc_DIN_numerical(t + 1) = conc_DIN_numerical(t)...
-                + conc_Nlab_numerical(t) * (miner)...
-                - conc_DIN_numerical(t) * (denit + plantup);
+        %if t < tsim
+        %    conc_Nref_numerical(t + 1) = conc_Nref_numerical(t)...
+        %        - conc_Nref_numerical(t) * k_degrad;
+        %    conc_Nlab_numerical(t + 1) = conc_Nlab_numerical(t) ...
+        %        + conc_Nref_numerical(t) * k_degrad...
+        %        - conc_Nlab_numerical(t) * (miner + dissol_2);
+        %    conc_DIN_numerical(t + 1) = conc_DIN_numerical(t)...
+        %        + conc_Nlab_numerical(t) * (miner)...
+        %        - conc_DIN_numerical(t) * (denit + plantup);
         end
         
     end
