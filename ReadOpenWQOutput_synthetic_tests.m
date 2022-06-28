@@ -3,7 +3,7 @@
 
 % Tests possible = [9, 10, 11, 11.1 12, 13];
 ExtrVisData = true;
-test = 12;
+test = 10;
 
 outputFolder = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/apply/Case_Studies/synthetic_tests/99_analytical_solutions/openWQ_results";
 
@@ -23,7 +23,7 @@ elseif test == 10
     Synthetic_test = '10_batch_singleSp_2ndorder';
 
     extractElm_info = {...
-        'SOIL_RECHR@SPECIES_A#KG',[1,1,1]
+        'SOIL_RECHR@SPECIES_A#G',[1,1,1]
         };
     
 elseif test == 11

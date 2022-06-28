@@ -6,7 +6,7 @@
 clear all;
 
 % Tests possible = [9, 10, 11, 11,1, 12, 13];
-test = 12;
+test = 10;
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Test 9
@@ -35,7 +35,7 @@ if (test == 9)
 elseif (test == 10)
     
     c0 = 10;
-    k = 0.0001;
+    k = 0.01;
 
     % Numerical
     openWQres_file = "openWQ_results/10_batch_singleSp_2ndorder.mat";
@@ -362,7 +362,8 @@ function [c_a, c_b, c_c] = test_3_threeSpecies(c0_a, c0_b, c0_c, k_a, k_b, k_c, 
 end
 
 % Nitrogen Cycle
-function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_DIN_analytical] = test_4_nitrogen(...
+function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_DIN_analytical] = ...
+    test_4_nitrogen(...
     c0_Nref,...
     c0_Nlab,...
     c0_DON,...
@@ -479,8 +480,8 @@ function [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_
         %        - conc_Nlab_numerical(t) * (miner + dissol_2);
         %    conc_DIN_numerical(t + 1) = conc_DIN_numerical(t)...
         %        + conc_Nlab_numerical(t) * (miner)...
-        %        - conc_DIN_numerical(t) * (denit + plantup);
-        end
+        %        - conc_DIN_numerical(t) * (denit + plantup)
+        %end
         
     end
 
@@ -559,7 +560,7 @@ function plotAnalytical_singleSpec(conc_A_analytical,...
     grid on
     
     tsim =  875;
-    k_a = 0.0001;
+    k_a = 0.01;
     c_a_numerical = zeros(tsim, 1);
     c0_a = 10;
     c_a_numerical(1) = c0_a;
