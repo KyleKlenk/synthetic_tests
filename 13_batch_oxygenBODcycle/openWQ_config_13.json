@@ -5,9 +5,9 @@
         "SOIL_RECHR":{
             "CYCLING_FRAMEWORK": ["BGQcycle_13"],
             "INITIAL_CONDITIONS":{
-                "BOD": [10,"kg"],
-                "DEFICIT_OXYG": [0,"kg"],
-                "DO": [0,"kg"]
+                "BOD": [10,"mg"],
+                "DEFICIT_OXYG": [0,"mg"],
+                "DO": [0,"mg"]
             }
         }
 

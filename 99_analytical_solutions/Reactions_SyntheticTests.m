@@ -3,10 +3,10 @@
 % Batch Reactor Tests -> Reaction synthetic tests
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clear all;
+clear all
 
-% Tests possible = [9, 10, 11, 11,1, 12, 13];
-test = 10;
+% Tests possible = [9, 10, 11, 11.1, 12, 13];
+test = 13;
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Test 9
@@ -545,35 +545,33 @@ function plotAnalytical_singleSpec(conc_A_analytical,...
    
    time = conc_A_openwq.Time;
    figure
-   plot(time, conc_A_analytical,'k-','linewidth',1)
+   ax1 = plot(time, conc_A_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
    hold on
-   plot(time, conc_A_openwq.data_save_final,'k--s','linewidth',1)
-   
+   ax2 = plot(time, conc_A_analytical,'k-','linewidth',2);
     xlabel("Time")
-    ylabel("Concentration")
+    ylabel("Concentration (mg/l)")
     
-    legend("Analytical",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
         
     title(title_str)
-    
+   
     grid on
     
-    tsim =  875;
-    k_a = 0.01;
-    c_a_numerical = zeros(tsim, 1);
-    c0_a = 10;
-    c_a_numerical(1) = c0_a;
-    for t = 1:tsim-1
-        
-        ti = t - 1;
-        
+    %tsim =  875;
+    %k_a = 0.01;
+    %c_a_numerical = zeros(tsim, 1);
+    %c0_a = 10;
+    %c_a_numerical(1) = c0_a;
+    %for t = 1:tsim-1 
+    %    ti = t - 1;   
     % Numerical approximation for testing purposes
-        dca_dt = k_a * c_a_numerical(t)^2 * (t-ti);
-        c_a_numerical(t+1) = c_a_numerical(t) - dca_dt;
-    end
-     hold on
-     plot(time, c_a_numerical,'r-','linewidth',1)
+    %    dca_dt = k_a * c_a_numerical(t)^2 * (t-ti);
+    %    c_a_numerical(t+1) = c_a_numerical(t) - dca_dt;
+    %end
+    % hold on
+    % plot(time, c_a_numerical,'r-','linewidth',1)
      
 end
 
@@ -594,25 +592,26 @@ function plotAnalytical_2species(conc_A_analytical,...
     sgtitle(title_str)
     
     subplot(1,2,1)
-    plot(time, conc_A_analytical,'k-','linewidth',1)
-    hold on
-    plot(time, conc_A_openwq.data_save_final,'k--s','linewidth',1)
+    ax1 = plot(time, conc_A_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+    ax2 = plot(time, conc_A_analytical,'k-','linewidth',2);
     xlabel("Time")
-    ylabel("Concentration")
-    legend("Analytical Solution",...
+    ylabel("Concentration (mg/l)")
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(spec_name_A)
     grid on
 
     subplot(1,2,2)
-    plot(time, conc_B_analytical,'k-','linewidth',1.5)
-    hold on
-    plot(time, conc_B_openwq.data_save_final,'k--s','linewidth',1)
-
+    ax1 = plot(time, conc_B_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+   ax2 = plot(time, conc_B_analytical,'k-','linewidth',2);
     xlabel("Time")
-    ylabel("Concentration")
+    ylabel("Concentration (mg/l)")
 
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
 
     title(spec_name_B)
@@ -637,34 +636,37 @@ function plotAnalytical_3species(conc_A_analytical,...
     sgtitle(title_str)
     
     subplot(1,3,1)
-    plot(time, conc_A_analytical,'k-','linewidth',1)
+    ax1 = plot(time, conc_A_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
     hold on
-    plot(time, conc_A_openwq.data_save_final,'k--s','linewidth',1)
+    ax2 = plot(time, conc_A_analytical,'k-','linewidth',1);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(spec_name_A)
     grid on
 
     subplot(1,3,2)
-    plot(time, conc_B_analytical,'k-','linewidth',1.5)
+    ax1 = plot(time, conc_B_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
     hold on
-    plot(time, conc_B_openwq.data_save_final,'k--s','linewidth',1)
+    ax2 = plot(time, conc_B_analytical,'k-','linewidth',1.5);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(spec_name_B)
     grid on
         
     subplot(1,3,3)
-    plot(time, conc_C_analytical,'k-','linewidth',1.5)
+    ax1 = plot(time, conc_C_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
     hold on
-    plot(time, conc_C_openwq.data_save_final,'k--s','linewidth',1)
+    ax2 = plot(time, conc_C_analytical,'k-','linewidth',1.5);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(spec_name_C)
     grid on
@@ -693,45 +695,49 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
     sgtitle(title_str)
     
     subplot(2,2,1)
-    plot(time, conc_Nref_analytical,'k-','linewidth',1)
-    hold on
-    plot(time, conc_Nref_openwq.data_save_final,'k--s','linewidth',1)
+    ax1 = plot(time, conc_Nref_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+   ax2 = plot(time, conc_Nref_analytical,'k-','linewidth',1);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(Nref_name)
     grid on
     
     subplot(2,2,2)
-    plot(time, conc_Nlab_analytical,'k-','linewidth',1)
-    hold on
-    plot(time, conc_Nlab_openwq.data_save_final,'k--s','linewidth',1)
+    ax1 = plot(time, conc_Nlab_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+   ax2 = plot(time, conc_Nlab_analytical,'k-','linewidth',1);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(Nlab_name)
     grid on
     
     subplot(2,2,3)
-    plot(time, conc_DON_analytical,'k-','linewidth',1)
-    hold on
-    plot(time, conc_DON_openwq.data_save_final,'k--s','linewidth',1)
+    ax1 = plot(time, conc_DON_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+    ax2 = plot(time, conc_DON_analytical,'k-','linewidth',1);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(DON_name)
     grid on
     
     subplot(2,2,4)
-    plot(time, conc_DIN_analytical,'k-','linewidth',1)
-    hold on
-    plot(time, conc_DIN_openwq.data_save_final,'k--s','linewidth',1)
+    ax1 = plot(time, conc_DIN_openwq.data_save_final,'--s','linewidth',2,...
+       'MarkerSize', 8, 'color', [.5 .5 .5]);
+   hold on
+   ax2 = plot(time, conc_DIN_analytical,'k-','linewidth',1);
     xlabel("Time")
     ylabel("Concentration")
-    legend("Analytical Solution",...
+    legend([ax2, ax1],"Analytical",...
             "OpenWQ")
     title(DIN_name)
     grid on

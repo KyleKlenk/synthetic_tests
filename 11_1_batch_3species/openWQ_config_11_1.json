@@ -5,10 +5,10 @@
         "SOIL_RECHR":{
             "CYCLING_FRAMEWORK": ["BGQcycle_11_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": [10,"kg"],
-                "species_B": [0,"kg"],
-                "species_C": [0,"kg"],
-                "species_D": [0,"kg"]
+                "species_A": [10,"mg"],
+                "species_B": [0,"mg"],
+                "species_C": [0,"mg"],
+                "species_D": [0,"mg"]
             }
         }
 

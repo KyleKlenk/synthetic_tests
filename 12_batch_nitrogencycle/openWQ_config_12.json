@@ -5,12 +5,12 @@
         "SOIL_RECHR":{
             "CYCLING_FRAMEWORK": ["BGQcycle_12"],
             "INITIAL_CONDITIONS":{
-                "Nref": [10,"kg"],
-                "Nlab": [10,"kg"],
-                "DIN": [5,"kg"],
-                "DON": [2,"kg"],
-                "N2": [0,"kg"],
-                "PLANTS": [0,"kg"]
+                "Nref": [10,"mg"],
+                "Nlab": [10,"mg"],
+                "DIN": [5,"mg"],
+                "DON": [2,"mg"],
+                "N2": [0,"mg"],
+                "PLANTS": [0,"mg"]
             }
         }
 

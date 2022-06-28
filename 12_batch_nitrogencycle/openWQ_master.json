@@ -31,7 +31,7 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["Nref","Nlab","DIN","DON"],
-		"UNITS":"kg",
+		"UNITS":"mg",
 		"COMPARTMENTS_AND_CELLS": {
 			"SOIL_RECHR": {
 				"1": [1,1,1]
