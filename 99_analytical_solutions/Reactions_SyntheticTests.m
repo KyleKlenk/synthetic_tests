@@ -6,7 +6,7 @@
 clear all
 
 % Tests possible = [9, 10, 11, 11.1, 12, 13];
-test = 13;
+test = 1;
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Test 9

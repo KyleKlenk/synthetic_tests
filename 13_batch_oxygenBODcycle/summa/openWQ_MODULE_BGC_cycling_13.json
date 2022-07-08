@@ -1,0 +1,37 @@
+{
+    "MODULE_NAME": "OPENWQ_NATIVE_BGC",
+    "CHEMICAL_SPECIES": {
+        "LIST": {
+            "1": "BOD",
+            "2": "DO",
+            "3": "DEFICIT_OXYG"
+        },
+        "BGC_general_mobile_species": []
+    },
+    "CYCLING_FRAMEWORKS": {
+        "BGQcycle_13": {
+            "LIST_TRANSFORMATIONS":{
+                "1": "BOD_decay",
+                "2": "Reaeration"
+            },
+            "1":{
+                "CONSUMED": "BOD",
+                "PRODUCED": "DEFICIT_OXYG",
+                "KINETICS_PER_DAY": "BOD * k",
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.1
+                }
+            },
+            "2":{
+                "CONSUMED": "DEFICIT_OXYG",
+                "PRODUCED": "DO",
+                "KINETICS_PER_DAY": "DEFICIT_OXYG * p",
+                "PARAMETER_NAMES": ["p"],
+                "PARAMETER_VALUES":{
+                    "p": 0.5
+                }
+            }
+        }
+    }
+}

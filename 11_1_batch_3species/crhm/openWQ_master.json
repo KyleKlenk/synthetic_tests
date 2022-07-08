@@ -1,0 +1,42 @@
+{
+    "PROJECT_NAME": "Synthetic_tests_11",
+    "GEOGRAPHICAL_LOCATION": "NA",
+    "AUTHORS": "Diogo Costa",
+    "DATE": "May_2022",
+    "COMMENT": "11_batch_2species",
+	"COMPUTATIONAL_SETTINGS":{
+		"RUN_MODE_DEBUG": true, 
+		"USE_NUM_THREADS": "all" // "all" or integer of number of threads to use (e.g., 10)
+	},
+    "OPENWQ_INPUT": {
+    	"CONFIG_FILEPATH": "openWQ_config_11_1.json",
+    	"SINKSOURCE_FILEPATHS": {
+    		"1": {
+    			"LABEL": "Load",
+    			"FILEPATH": "openWQ_source_batchSimulations.json"
+    		}
+		}
+	},
+	"MODULES": {
+		"BIOGEOCHEMISTRY":{
+			"MODULE_NAME": "OPENWQ_NATIVE_BGC",
+			"MODULE_CONFIG_FILEPATH": "openWQ_MODULE_BGC_cycling_11_1.json"
+		},
+		"TRANSPORT_EROSION":{
+			"MODULE_NAME": "OPENWQ_NATIVE_TE_NO_ADVDISP", // needed for CRHM because it already uses its native transport routined
+			"MODULE_CONFIG_FILEPATH": "openWQ_MODULE_TE_batchSimulations.json"	
+		}
+	},
+	"OPENWQ_OUTPUT": {
+		"RESULTS_FOLDERPATH": "Output_OpenWQ",
+        "FORMAT": "HDF5", // HDF5, CSV
+        "CHEMICAL_SPECIES":["species_A","species_B","species_C"],
+		"UNITS":"mg",
+		"COMPARTMENTS_AND_CELLS": {
+			"SOIL_RECHR": {
+				"1": [1,1,1]
+			}
+		},
+		"TIMESTEP": [1,"day"]
+	}
+}
