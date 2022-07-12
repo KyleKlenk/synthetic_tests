@@ -2,7 +2,7 @@
     
     "BIOGEOCHEMISTRY_CONFIGURATION":{
 
-        "SOIL_RECHR":{
+        "SWE":{
             "CYCLING_FRAMEWORK": ["BGQcycle_9"],
             "INITIAL_CONDITIONS":{
                 "species_A": [10,"mg"],
