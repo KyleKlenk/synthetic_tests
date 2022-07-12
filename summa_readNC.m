@@ -71,7 +71,7 @@ crhm_dateEnd = [2019, 12, 20, 13, 45, 0];
 summa_dateStart = [1990, 1, 1, 0, 0, 0];
 sartSec = etime(crhm_dateStart, summa_dateStart);
 endSec = etime(crhm_dateEnd, summa_dateStart);
-newTime = [sartSec:15 * 60: endSec];
+newTime = (sartSec: 15 * 60: endSec);
 
 ncwrite(newNCfile,'time',newTime);
 
@@ -89,21 +89,27 @@ ParamList = {
 for p = 1:numel(ParamList)
     
     varNum = ncread(newNCfile,ParamList{p});
-    newVar = repelem(varNum(1), numel(time));
+    newVar = repelem(varNum(1), numel(newTime));
     
     ncwrite(newNCfile,ParamList{p}, newVar);
     
 end
 
+%ncwriteatt(ncwriteatt,"time","units", "days since 1995-01-01 00:00:00")
+
 % Plot
 figure
 
-numPanels_xy = ceil(numel(ParamList)/2);
+numPanels_y = ceil(numel(ParamList)/2);
+numPanels_x = ceil(numel(ParamList)/numPanels_y);
 for p = 1:numel(ParamList)
     
     varVals = ncread(newNCfile,ParamList{p});
     
-    subplot(numPanels_xy, numPanels_xy, p)
-    plot(time, varVals)
+    subplot(numPanels_x, numPanels_y, p)
+    plot(newTime, varVals)
+    xlabel('time')
+    ylabel(ParamList{p})
+    title(ParamList{p})
 
 end
