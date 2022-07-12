@@ -68,11 +68,12 @@ ncdisp(newNCfile)
 % change time (same as crhm's simulation so that results can be compared)
 crhm_dateStart = [2017, 7, 28, 12, 15, 0];
 crhm_dateEnd = [2019, 12, 20, 13, 45, 0];
-summa_dateStart = [1990, 1, 1, 0, 0, 0];
+summa_dateStart = crhm_dateStart;
 sartSec = etime(crhm_dateStart, summa_dateStart);
+sartDays = sartSec / (24 * 60 * 60);
 endSec = etime(crhm_dateEnd, summa_dateStart);
-newTime = (sartSec: 15 * 60: endSec);
-
+endDays = endSec / (24 * 60 * 60);
+newTime = (sartDays: 1/ (4 * 24): endDays);
 ncwrite(newNCfile,'time',newTime);
 
 % change data_step
