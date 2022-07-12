@@ -75,6 +75,8 @@ newTime = (sartSec: 15 * 60: endSec);
 
 ncwrite(newNCfile,'time',newTime);
 
+% change data_step
+ncwrite(newNCfile,'data_step',900);
 
 % change variables
 ParamList = {
@@ -95,7 +97,9 @@ for p = 1:numel(ParamList)
     
 end
 
-%ncwriteatt(ncwriteatt,"time","units", "days since 1995-01-01 00:00:00")
+ncwriteatt(newNCfile,'time','units', ['days since ',...
+    datestr(summa_dateStart,'yyyy-mm-dd HH:MM:SS')... format: '1995-01-01 00:00:00'
+    ])
 
 % Plot
 figure
@@ -113,3 +117,5 @@ for p = 1:numel(ParamList)
     title(ParamList{p})
 
 end
+
+ncdisp(newNCfile)
