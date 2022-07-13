@@ -33,7 +33,7 @@
         "CHEMICAL_SPECIES":["species_A","species_B","species_C"],
 		"UNITS":"mg",
 		"COMPARTMENTS_AND_CELLS": {
-			"SOIL_RECHR": {
+			"SCALARAQUIFER": {
 				"1": [1,1,1]
 			}
 		},

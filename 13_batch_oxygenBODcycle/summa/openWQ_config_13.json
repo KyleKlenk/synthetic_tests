@@ -2,7 +2,7 @@
     
     "BIOGEOCHEMISTRY_CONFIGURATION":{
 
-        "SOIL_RECHR":{
+        "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_13"],
             "INITIAL_CONDITIONS":{
                 "BOD": [10,"mg"],

@@ -33,7 +33,7 @@
         "CHEMICAL_SPECIES":["species_A","species_B"],
 		"UNITS":"mg",
 		"COMPARTMENTS_AND_CELLS": {
-			"SWE": {
+			"SCALARAQUIFER": {
 				"1": [1,1,1]
 			}
 		},

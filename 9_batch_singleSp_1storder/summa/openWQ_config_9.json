@@ -2,7 +2,7 @@
     
     "BIOGEOCHEMISTRY_CONFIGURATION":{
 
-        "SWE":{
+        "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_9"],
             "INITIAL_CONDITIONS":{
                 "species_A": [10,"mg"],
