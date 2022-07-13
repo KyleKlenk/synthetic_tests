@@ -5,7 +5,7 @@
 	},
 	"1": {
 		"Chemical_name": "species_A",
-		"Compartment_name": "SOIL_RECHR",
+		"Compartment_name": "NO_COMPARTMENT",
 		"Type": "source",
 		"Units": "kg",
 		"Data": { // YYYY,MM,DD,HH,ix,iy,iz,load
