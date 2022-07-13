@@ -5,8 +5,16 @@
 
 clear all
 
+model_all = {'crhm',...
+            'summa'};
+        
+model_i = 2;
+
+model_name = model_all{model_i};
+outputFolder = strcat('../outputs_mat/',model_name,'/');
+
 % Tests possible = [9, 10, 11, 11.1, 12, 13];
-test = 1;
+test = 10;
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Test 9
@@ -17,8 +25,10 @@ if (test == 9)
     k = 0.01;
     
     % OpenWQ
-    openWQres_file = "openWQ_results/9_batch_singleSp_1storder.mat";
-    conc_A_openwq = getOpenWQResults_1species(openWQres_file);
+    openWQres_file = '9_batch_singleSp_1storder.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    
+    conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(conc_A_openwq.Time);
@@ -38,8 +48,9 @@ elseif (test == 10)
     k = 0.01;
 
     % Numerical
-    openWQres_file = "openWQ_results/10_batch_singleSp_2ndorder.mat";
-    conc_A_openwq = getOpenWQResults_1species(openWQres_file);
+    openWQres_file = '10_batch_singleSp_2ndorder.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(conc_A_openwq.Time);
@@ -60,8 +71,9 @@ elseif (test == 11)
     k_a = 0.03;
     k_b = 0.01;
     
-    openWQres_file = "openWQ_results/11_batch_2species.mat";
-    [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file);
+    openWQres_file = '11_batch_2species.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(conc_A_openwq.Time);
@@ -88,8 +100,9 @@ elseif (test == 11.1)
     k_b = 0.01;
     k_c = 0.005;
     
-    openWQres_file = "openWQ_results/11_1_batch_3species.mat";
-    [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file);
+    openWQres_file = '11_1_batch_3species.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(conc_A_openwq.Time);
@@ -126,8 +139,9 @@ elseif (test == 12)
     denit = 0.001;
     plantup = 0.001;
     
-    openWQres_file = "openWQ_results/12_batch_nitrogencycle.mat";
-    [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file);
+    openWQres_file = '12_batch_nitrogencycle.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(conc_Nref_openwq.Time);
@@ -179,8 +193,9 @@ elseif (test == 13)
     %%%%%%%%%%%%%%%%%%%%
     
     % Numerical
-    openWQres_file = "openWQ_results/13_batch_oxygenBODcycle.mat";
-    [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file);
+    openWQres_file = '13_batch_oxygenBODcycle.mat';
+    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+    [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file_fullpath);
     
     % Analytical
     tsim = numel(c_bod_openwq.Time);

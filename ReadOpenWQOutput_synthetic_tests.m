@@ -5,7 +5,7 @@
 ExtrVisData = true;
 test = 13;
 
-outputFolder = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/synthTestT_results/";
+outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests/outputs_mat';
 model_all = {'crhm',...
             'summa'};
         
@@ -99,8 +99,8 @@ end
     % ================================================================================================
 if ExtrVisData == true
    
-    addpath("/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs")
-    openwq_readfuncs_dir = "/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs";
+    addpath('/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs')
+    openwq_readfuncs_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs';
 
     plot_elemt_flag = true;
 
