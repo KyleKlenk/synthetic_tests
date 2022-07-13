@@ -5,17 +5,22 @@
 ExtrVisData = true;
 test = 13;
 
-outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests/outputs_mat';
 model_all = {'crhm',...
             'summa'};
         
 model_i = 2;
 
+outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/synthTestT_results';
+
 model_name = model_all{model_i};
 
 if model_i == 1
+    % crhm
+    results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/bin/Case_Studies/synthetic_tests';  
     comptName = 'SOIL_RECHR';
 elseif model_i ==2
+    % summa
+    results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests';
     comptName = 'SCALARAQUIFER';
 end
 
@@ -99,12 +104,13 @@ end
     % ================================================================================================
 if ExtrVisData == true
    
-    addpath('/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs')
-    openwq_readfuncs_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/build/source/openwq/openwq/supporting_scripts/Read_Outputs';
+
+    openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
+    addpath(openwq_readfuncs_dir)
 
     plot_elemt_flag = true;
 
-    folderpath = strcat(Synthetic_test,'/', model_name,'/Output_OpenWQ/');
+    folderpath = strcat(results_dir, '/', Synthetic_test,'/', model_name,'/Output_OpenWQ/');
 
     output_openwq_tscollect_all = read_OpenWQ_outputs(...
         openwq_readfuncs_dir,...    % Fullpath for needed functions

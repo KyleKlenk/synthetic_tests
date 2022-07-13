@@ -8,13 +8,13 @@ clear all
 model_all = {'crhm',...
             'summa'};
         
-model_i = 2;
+model_i = 1;
 
 model_name = model_all{model_i};
-outputFolder = strcat('../outputs_mat/',model_name,'/');
+outputFolder = strcat('../../../../synthTestT_results/',model_name,'/');
 
 % Tests possible = [9, 10, 11, 11.1, 12, 13];
-test = 10;
+test = 11;
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % Test 9
