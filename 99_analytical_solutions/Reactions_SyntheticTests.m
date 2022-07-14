@@ -5,224 +5,235 @@
 
 clear all
 
+% Configuration
 model_all = {'crhm',...
             'summa'};
+
+tests_all = [9, 10, 11, 11.1, 12, 13];
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start Processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Loop over models
+for model_i = 1:numel(model_all)
+
+    model_name = model_all{model_i};
+    outputFolder = strcat('../../../../synthTestT_results/',model_name,'/');
+
+        % Loop over tests
+    for test_num = 1:numel(tests_all)
+
+        test = tests_all(test_num);
         
-model_i = 1;
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 9
+        if (test == 9)
 
-model_name = model_all{model_i};
-outputFolder = strcat('../../../../synthTestT_results/',model_name,'/');
+            c0 = 10;
+            k = 0.01;
 
-% Tests possible = [9, 10, 11, 11.1, 12, 13];
-test = 11;
+            % OpenWQ
+            openWQres_file = '9_batch_singleSp_1storder.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 9
-%%%%%%%%%%%%%%%%%%%%%%%
-if (test == 9)
+            conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
 
-    c0 = 10;
-    k = 0.01;
-    
-    % OpenWQ
-    openWQres_file = '9_batch_singleSp_1storder.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    
-    conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(conc_A_openwq.Time);
-    conc_A_analytical = test_1_singleSpecies_1order(c0, k, tsim);
-    
-    title_str = "Batch Reactor: Single species with 1^{st} order decay";
-    plotAnalytical_singleSpec(conc_A_analytical,...
-                              conc_A_openwq,...
-                              title_str)
+            % Analytical
+            tsim = numel(conc_A_openwq.Time);
+            conc_A_analytical = test_1_singleSpecies_1order(c0, k, tsim);
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 10
-%%%%%%%%%%%%%%%%%%%%%%%
-elseif (test == 10)
-    
-    c0 = 10;
-    k = 0.01;
+            title_str = "Batch Reactor: Single species with 1^{st} order decay";
+            plotAnalytical_singleSpec(conc_A_analytical,...
+                                      conc_A_openwq,...
+                                      title_str)
 
-    % Numerical
-    openWQres_file = '10_batch_singleSp_2ndorder.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(conc_A_openwq.Time);
-    conc_A_analytical = test_2_singleSpecies_2ndorder(c0, k, tsim);
-    
-    title_str = "Batch Reactor: Single species with 2^{nd} order decay";
-    plotAnalytical_singleSpec(conc_A_analytical,...
-                              conc_A_openwq,...
-                              title_str)
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 10
+        %%%%%%%%%%%%%%%%%%%%%%%
+        elseif (test == 10)
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 11
-%%%%%%%%%%%%%%%%%%%%%%%
-elseif (test == 11)
-    
-    c0_a = 10;
-    c0_b = 0;
-    k_a = 0.03;
-    k_b = 0.01;
-    
-    openWQres_file = '11_batch_2species.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(conc_A_openwq.Time);
-    [conc_A_analytical, conc_B_analytical] = test_3_twoSpecies(c0_a, c0_b, k_a, k_b, tsim);
-    
-    title_str = "Batch Reactor: Chain reaction with 2 Species with 1^{st} order decay";
-    plotAnalytical_2species(conc_A_analytical,...
-                            conc_B_analytical,...
-                            conc_A_openwq,...
-                            conc_B_openwq,...
-                            title_str,...
-                            "Species\_A",...
-                            "Species\_B")
+            c0 = 10;
+            k = 0.01;
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 11.1
-%%%%%%%%%%%%%%%%%%%%%%%
-elseif (test == 11.1)
-    
-    c0_a = 10;
-    c0_b = 0;
-    c0_c = 0;
-    k_a = 0.03;
-    k_b = 0.01;
-    k_c = 0.005;
-    
-    openWQres_file = '11_1_batch_3species.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(conc_A_openwq.Time);
-    [conc_A_analytical, conc_B_analytical, conc_C_analytical] = test_3_threeSpecies(c0_a, c0_b, c0_c, k_a, k_b, k_c, tsim);
-    
-    title_str = "Batch Reactor: Chain reaction with 3 Species with 1^{st} order decay";
-    plotAnalytical_3species(conc_A_analytical,...
-                            conc_B_analytical,...
-                            conc_C_analytical,...
-                            conc_A_openwq,...
-                            conc_B_openwq,...
-                            conc_C_openwq,...
-                            title_str,...
-                            "Species\_A",...
-                            "Species\_B",...
-                            "Species\_C")
-    
-    
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 12
-%%%%%%%%%%%%%%%%%%%%%%%
-elseif (test == 12)
+            % Numerical
+            openWQres_file = '10_batch_singleSp_2ndorder.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+            conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
 
-    c0_Nref = 10;
-    c0_Nlab = 10;
-    c0_DON = 2;
-    c0_DIN = 5;
-    c0_N2 = 0;
-    c0_plants = 0;
-    k_degrad = 0.006;
-    dissol_1 = 0.0002;
-    dissol_2 = 0.0003;
-    miner = 0.003;
-    denit = 0.001;
-    plantup = 0.001;
-    
-    openWQres_file = '12_batch_nitrogencycle.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(conc_Nref_openwq.Time);
-    [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_DIN_analytical] = test_4_nitrogen(c0_Nref,...
-        c0_Nlab,...
-        c0_DON,...
-        c0_DIN,...
-        c0_N2,...
-        c0_plants,...
-        k_degrad,...
-        dissol_1,...
-        dissol_2,...
-        miner,...
-        denit,...
-        plantup,...
-        tsim);
+            % Analytical
+            tsim = numel(conc_A_openwq.Time);
+            conc_A_analytical = test_2_singleSpecies_2ndorder(c0, k, tsim);
 
-    title_str = "Batch Reactor: Nitrogen Cycle";
-    plotAnalytical_NcycleRes(conc_Nref_analytical,...
-                            conc_Nlab_analytical,...
-                            conc_DON_analytical,...
-                            conc_DIN_analytical,...
-                            conc_Nref_openwq,...
-                            conc_Nlab_openwq,...
-                            conc_DON_openwq,...
-                            conc_DIN_openwq,...
-                            title_str,...
-                            "Nref",...
-                            "Nlab",...
-                            "DON",...
-                            "DIN")
-    
-%%%%%%%%%%%%%%%%%%%%%%%
-% Test 13
-%%%%%%%%%%%%%%%%%%%%%%%
-elseif (test == 13)
-    
-    c0_bod = 10;
-    c0_do_deficit = 0;
-    c0_do_sat = 12;
-    k_bod = 0.1;
-    k_rear = 0.5;
-    
-    % Model works with mass balance, we either work with state-variables (DO) or
-    % anti-state-variables (BOD, DO_defitic). In this case we are using variables
-    
-    %%%%%%%%%%%%%%%%%%%%%
-    % Anti-State-Variables
-    %%%%%%%%%%%%%%%%%%%%
-    
-    % Numerical
-    openWQres_file = '13_batch_oxygenBODcycle.mat';
-    openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
-    [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file_fullpath);
-    
-    % Analytical
-    tsim = numel(c_bod_openwq.Time);
-    [c_bod_analytical, c_do_deficit_analytical] = test_Streeter_Phelps(c0_bod, c0_do_deficit, k_bod, k_rear, tsim);
-    
-    
-    %%%%%%%%%%%%%%%%%%%%%
-    % Calculatinf State-Variables
-    %%%%%%%%%%%%%%%%%%%%
-    
-    % Post calculating the relevant state-variable DO (opossite to the
-    % anti-state variable used DO_deficit)
-    c_do_analytical = c0_do_sat - c_do_deficit_analytical;
-    c_do_openwq = c_do_openwq_deficit;
-    c_do_openwq.data_save_final = c0_do_sat - c_do_openwq_deficit.data_save_final;
-    
-    title_str = "Batch Reactor: Streeter Phelps (DO sag)";
-    plotAnalytical_2species(c_bod_analytical,...
-                            c_do_analytical,...
-                            c_bod_openwq,...
-                            c_do_openwq,...
-                            title_str,...
-                            "BOD",...
-                            "DO")
-                        
+            title_str = "Batch Reactor: Single species with 2^{nd} order decay";
+            plotAnalytical_singleSpec(conc_A_analytical,...
+                                      conc_A_openwq,...
+                                      title_str)
+
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 11
+        %%%%%%%%%%%%%%%%%%%%%%%
+        elseif (test == 11)
+
+            c0_a = 10;
+            c0_b = 0;
+            k_a = 0.03;
+            k_b = 0.01;
+
+            openWQres_file = '11_batch_2species.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+            [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file_fullpath);
+
+            % Analytical
+            tsim = numel(conc_A_openwq.Time);
+            [conc_A_analytical, conc_B_analytical] = test_3_twoSpecies(c0_a, c0_b, k_a, k_b, tsim);
+
+            title_str = "Batch Reactor: Chain reaction with 2 Species with 1^{st} order decay";
+            plotAnalytical_2species(conc_A_analytical,...
+                                    conc_B_analytical,...
+                                    conc_A_openwq,...
+                                    conc_B_openwq,...
+                                    title_str,...
+                                    "Species\_A",...
+                                    "Species\_B")
+
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 11.1
+        %%%%%%%%%%%%%%%%%%%%%%%
+        elseif (test == 11.1)
+
+            c0_a = 10;
+            c0_b = 0;
+            c0_c = 0;
+            k_a = 0.03;
+            k_b = 0.01;
+            k_c = 0.005;
+
+            openWQres_file = '11_1_batch_3species.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+            [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file_fullpath);
+
+            % Analytical
+            tsim = numel(conc_A_openwq.Time);
+            [conc_A_analytical, conc_B_analytical, conc_C_analytical] = test_3_threeSpecies(c0_a, c0_b, c0_c, k_a, k_b, k_c, tsim);
+
+            title_str = "Batch Reactor: Chain reaction with 3 Species with 1^{st} order decay";
+            plotAnalytical_3species(conc_A_analytical,...
+                                    conc_B_analytical,...
+                                    conc_C_analytical,...
+                                    conc_A_openwq,...
+                                    conc_B_openwq,...
+                                    conc_C_openwq,...
+                                    title_str,...
+                                    "Species\_A",...
+                                    "Species\_B",...
+                                    "Species\_C")
+
+
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 12
+        %%%%%%%%%%%%%%%%%%%%%%%
+        elseif (test == 12)
+
+            c0_Nref = 10;
+            c0_Nlab = 10;
+            c0_DON = 2;
+            c0_DIN = 5;
+            c0_N2 = 0;
+            c0_plants = 0;
+            k_degrad = 0.006;
+            dissol_1 = 0.0002;
+            dissol_2 = 0.0003;
+            miner = 0.003;
+            denit = 0.001;
+            plantup = 0.001;
+
+            openWQres_file = '12_batch_nitrogencycle.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+            [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file_fullpath);
+
+            % Analytical
+            tsim = numel(conc_Nref_openwq.Time);
+            [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_DIN_analytical] = test_4_nitrogen(c0_Nref,...
+                c0_Nlab,...
+                c0_DON,...
+                c0_DIN,...
+                c0_N2,...
+                c0_plants,...
+                k_degrad,...
+                dissol_1,...
+                dissol_2,...
+                miner,...
+                denit,...
+                plantup,...
+                tsim);
+
+            title_str = "Batch Reactor: Nitrogen Cycle";
+            plotAnalytical_NcycleRes(conc_Nref_analytical,...
+                                    conc_Nlab_analytical,...
+                                    conc_DON_analytical,...
+                                    conc_DIN_analytical,...
+                                    conc_Nref_openwq,...
+                                    conc_Nlab_openwq,...
+                                    conc_DON_openwq,...
+                                    conc_DIN_openwq,...
+                                    title_str,...
+                                    "Nref",...
+                                    "Nlab",...
+                                    "DON",...
+                                    "DIN")
+
+        %%%%%%%%%%%%%%%%%%%%%%%
+        % Test 13
+        %%%%%%%%%%%%%%%%%%%%%%%
+        elseif (test == 13)
+
+            c0_bod = 10;
+            c0_do_deficit = 0;
+            c0_do_sat = 12;
+            k_bod = 0.1;
+            k_rear = 0.5;
+
+            % Model works with mass balance, we either work with state-variables (DO) or
+            % anti-state-variables (BOD, DO_defitic). In this case we are using variables
+
+            %%%%%%%%%%%%%%%%%%%%%
+            % Anti-State-Variables
+            %%%%%%%%%%%%%%%%%%%%
+
+            % Numerical
+            openWQres_file = '13_batch_oxygenBODcycle.mat';
+            openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
+            [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file_fullpath);
+
+            % Analytical
+            tsim = numel(c_bod_openwq.Time);
+            [c_bod_analytical, c_do_deficit_analytical] = test_Streeter_Phelps(c0_bod, c0_do_deficit, k_bod, k_rear, tsim);
+
+
+            %%%%%%%%%%%%%%%%%%%%%
+            % Calculatinf State-Variables
+            %%%%%%%%%%%%%%%%%%%%
+
+            % Post calculating the relevant state-variable DO (opossite to the
+            % anti-state variable used DO_deficit)
+            c_do_analytical = c0_do_sat - c_do_deficit_analytical;
+            c_do_openwq = c_do_openwq_deficit;
+            c_do_openwq.data_save_final = c0_do_sat - c_do_openwq_deficit.data_save_final;
+
+            title_str = "Batch Reactor: Streeter Phelps (DO sag)";
+            plotAnalytical_2species(c_bod_analytical,...
+                                    c_do_analytical,...
+                                    c_bod_openwq,...
+                                    c_do_openwq,...
+                                    title_str,...
+                                    "BOD",...
+                                    "DO")
+
+        end
+    end
 end
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
