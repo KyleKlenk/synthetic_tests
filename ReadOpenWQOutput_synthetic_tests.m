@@ -8,6 +8,7 @@ outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scien
 model_all = {'crhm',...
             'summa'};
 tests_all = [9, 10, 11, 11.1 12, 13];
+openwq_noWaterConcFlag = -999999;
 
 %%%%%%%%%%%%%%%%%%%
 % Start Processing

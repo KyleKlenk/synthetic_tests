@@ -32,6 +32,7 @@
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["species_A","species_B"],
 		"UNITS":"g",
+		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
 			"SOIL_RECHR": {
 				"1": [1,1,1]

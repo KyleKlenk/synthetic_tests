@@ -3,7 +3,7 @@
     "GEOGRAPHICAL_LOCATION": "NA",
     "AUTHORS": "Diogo Costa",
     "DATE": "May_2022",
-    "COMMENT": "9_batch_singleSp_1storder",
+    "COMMENT": "1_conserv_instant_SW",
 	"COMPUTATIONAL_SETTINGS":{
 		"RUN_MODE_DEBUG": true, 
 		"USE_NUM_THREADS": "all" // "all" or integer of number of threads to use (e.g., 10)
@@ -31,7 +31,8 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["species_A","species_B"],
-		"UNITS":"mg",
+		"UNITS":"mg/l",
+		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
 			"SCALARAQUIFER": {
 				"1": [1,1,1]
