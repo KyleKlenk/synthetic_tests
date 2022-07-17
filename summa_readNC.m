@@ -9,19 +9,34 @@ clear all
 % Runs to process
 model_name = 'summa'; % scriot only for summa (not applicable to CRHM)
 
-tests_all = [9,...
+tests_all = [1,...
     ...9, 10, 11, 11.1 12, 13...
     ];
 
 DataType_2exam_all = {...
     'output',...
-    'forcing_data'
+    ...'forcing_data'
     };
 
 % if choosing output, then select the parameters to plot
 Output_paramList = {
+    'averageRoutedRunoff',...
     'scalarSWE',...
+    'mLayerVolFracIce',...
     'mLayerVolFracLiq',...
+    'mLayerMatricHead',...
+    'scalarSnowfall',...
+    'scalarSnowSublimation',...
+    'scalarGroundEvaporation',...
+    'mLayerTranspire',...
+    'scalarThroughfallSnow',...
+    'scalarThroughfallRain',...
+    'scalarSnowDrainage',...
+    'scalarInfiltration',...
+    'iLayerLiqFluxSoil',...
+    'mLayerBaseflow',...
+    'scalarSoilBaseflow',...
+    'scalarSoilDrainage',...    
     };
 
 hru_num = 1;
@@ -103,10 +118,7 @@ for test_i = 1:numel(tests_all)
         elseif strcmp(DataType_2exam, 'output'); paramList = Output_paramList;
         end
         
-        figure   
-        numPanels_y = ceil(numel(paramList)/2);
-        numPanels_x = ceil(numel(paramList)/numPanels_y);
-        
+        % Get time
         time_secs = ncread(nc_file,'time');
         timeAtr = ncreadatt(nc_file,'time','units');
         timeAtr_split = split(timeAtr,'since');
@@ -122,8 +134,15 @@ for test_i = 1:numel(tests_all)
             time = datetime(timeAtr_starDate) + days(time_secs);
         end
         
-        
-        for p = 1:numel(paramList)
+         %Extract data 
+        hbar = parfor_progressbar(...
+        numel(paramList),...
+        ['Extracting summa variables. File: ', nc_file]);
+    
+        parfor p = 1:numel(paramList)
+            
+            % update waitbar
+            hbar.iterate(1);
 
             varVals_all = ncread(nc_file,paramList{p});
             size_varVals = size(varVals_all);
@@ -135,11 +154,30 @@ for test_i = 1:numel(tests_all)
                 varVals = varVals_all;
             end
             
+            varVals_compile{p} = varVals;
+
+        end
+        
+        % Plot
+    
+        figure('Name', nc_file)   
+        numPanels_y = ceil(numel(paramList)/2);
+        numPanels_x = ceil(numel(paramList)/numPanels_y);
+        
+        hbar = parfor_progressbar(...
+        numel(paramList),...
+        ['Plotting summa variables. File: ', nc_file]);
+        for p = 1:numel(paramList)
+            
+            % update waitbar
+            hbar.iterate(1);
+            
+            varVals = varVals_compile{p};
+            
             subplot(numPanels_x, numPanels_y, p)
             plot(time, varVals)
             xlabel('time')
             ylabel(paramList{p})
-            title(nc_file)
             datetick('x','keeplimits','keepticks')
             grid on
 
