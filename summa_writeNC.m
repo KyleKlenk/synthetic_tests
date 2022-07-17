@@ -5,136 +5,149 @@ clear all
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input info
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% Change forcing file
 
 % Runs to process
-model_name = 'summa';
 
-tests_all = [1,...
-    ...9, 10, 11, 11.1 12, 13...
-    ];
+test_num = 1; % 1, 9, 10, 11, 11.1 12, 13
 
-DataType_2exam_all = {...
-    ....'outputs',...
-    'forcing'};
+n_hru = 105;
+
+Forcing_paramList = {
+    {'LWRadAtm', 350},...
+    {'SWRadAtm', 0},...
+    {'airpres', 101325},...
+    {'airtemp', 283.16 + 10},...
+    {'pptrate', 0},...
+    {'spechum', 0.001},...
+    {'windspd', 0},...
+    };
 
 
+newNC_sufix = '_new';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input info
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for 
+model_name = 'summa';
+DataType_2exam = 'forcing_data';
 
-test_i = 1;
-test = tests_all(test_i);
-
-DataType_2exam = DataType_2exam_all{d};
-if strcmp(DataType_2exam, 'output')
-    % Outputs
-    folder = '9_batch_singleSp_1storder/summa/summa/output/';
-    nc_files_all = {'openWQ_synthTests_timestep.nc',...
-                'celia1990_G1-1_timestep.nc'};
-elseif strcmp(DataType_2exam, 'forcing')        
-    % Forcing
-    folder = '9_batch_singleSp_1storder/summa/summa/forcing_data/';
-    nc_files_all = {'celia1990_forcing.nc'};
+% Folder dir
+if test_num == 1; folderTest = '1_conserv_instant_SW';
+elseif test_num == 9; folderTest = '9_batch_singleSp_1storder';
+elseif test_num == 10; folderTest = '10_batch_singleSp_2ndorder';
+elseif test_num == 11; folderTest = '11_batch_2species';    
+elseif test_num == 11.1; folderTest = '11_1_batch_3species';   
+elseif test_num == 12; folderTest = '12_batch_nitrogencycle';   
+elseif test_num == 13; folderTest = '13_batch_oxygenBODcycle';   
 end
 
-nc_file_i = 1;
+% Forcing file
+if test_num == 1; nc_forcing = 'openWQ_syntheticTests_Transp_forcing.nc';
+elseif test_num == 9; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';
+elseif test_num == 10; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';
+elseif test_num == 11; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';    
+elseif test_num == 11.1; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';   
+elseif test_num == 12; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';   
+elseif test_num == 13; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';   
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Extract data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nc_file = strcat(folder,nc_files_all{nc_file_i});
+
+folder = strcat(folderTest,'/summa/summa/',DataType_2exam,'/');
+nc_file = strcat(folder,nc_forcing);
 
 % To get information about the nc file
-ncinfo(nc_file)
+% ncinfo(nc_file)
 % to display nc file
-ncdisp(nc_file)
+% ncdisp(nc_file)
+
 % to read a vriable 'var' exisiting in nc file
-myvar_summa = ncread(nc_file,'data_step');
-time_summa = ncread(nc_file,'time');
+% myvar_summa = ncread(nc_file,'data_step');
+% time_summa = ncread(nc_file,'time');
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Plot
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-figure
-plot(time_summa, myvar_summa)
-axis tight
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Change nc file
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % duplicate original nc file
-newNCfile = strcat(folder,'openWQ_syntheticTests_BGC_forcing.nc');
+newNCfile = strcat(folder,extractBefore(nc_forcing,'.nc'),...
+    newNC_sufix,...
+    '.nc');
+
 copyfile(nc_file, newNCfile)
 
-% change attributes
-%fileattrib(newNCfile)
-%ncwriteatt(newNCfile,'hruId','Dimensions','lala');
-
-ncdisp(newNCfile)
+%ncdisp(newNCfile)
 
 %%%%%%%%%%
 % change variables
 %%%%%%%%%%
 
 % change time (same as crhm's simulation so that results can be compared)
-crhm_dateStart = [2017, 7, 28, 12, 15, 0];
-crhm_dateEnd = [2019, 12, 20, 13, 45, 0];
-summa_dateStart = crhm_dateStart;
-sartSec = etime(crhm_dateStart, summa_dateStart);
-sartDays = sartSec / (24 * 60 * 60);
-endSec = etime(crhm_dateEnd, summa_dateStart);
-endDays = endSec / (24 * 60 * 60);
-newTime = (sartDays: 1/ (4 * 24): endDays);
-ncwrite(newNCfile,'time',newTime);
-
+% crhm_dateStart = [2017, 7, 28, 12, 15, 0];
+% crhm_dateEnd = [2019, 12, 20, 13, 45, 0];
+% summa_dateStart = crhm_dateStart;
+% sartSec = etime(crhm_dateStart, summa_dateStart);
+% sartDays = sartSec / (24 * 60 * 60);
+% endSec = etime(crhm_dateEnd, summa_dateStart);
+% endDays = endSec / (24 * 60 * 60);
+% newTime = (sartDays: 1/ (4 * 24): endDays);
+% ncwrite(newNCfile,'time',newTime);
 % change data_step
-ncwrite(newNCfile,'data_step',900);
+%ncwrite(newNCfile,'data_step',900);
 
 % change variables
-ParamList = {
-    'LWRadAtm',...
-    'SWRadAtm',...
-    'airpres',...
-    'airtemp',...
-    'pptrate',...
-    'spechum',...
-    'windspd'};
-
-for p = 1:numel(ParamList)
+for p = 1:numel(Forcing_paramList)
     
-    varNum = ncread(newNCfile,ParamList{p});
-    newVar = repelem(varNum(1), numel(newTime));
+    varName = Forcing_paramList{p}{1};
+    varNewNum = Forcing_paramList{p}{2};
+    varNum = ncread(newNCfile,varName);
     
-    ncwrite(newNCfile,ParamList{p}, newVar);
+    newVar = repelem(varNewNum, numel(varNum));
+    
+    ncwrite(newNCfile,varName, newVar);
     
 end
 
-ncwriteatt(newNCfile,'time','units', ['days since ',...
-    datestr(summa_dateStart,'yyyy-mm-dd HH:MM:SS')... format: '1995-01-01 00:00:00'
-    ])
 
 % Plot
-figure
+figure   
+numPanels_y = ceil(numel(Forcing_paramList)/2);
+numPanels_x = ceil(numel(Forcing_paramList)/numPanels_y);
 
-numPanels_y = ceil(numel(ParamList)/2);
-numPanels_x = ceil(numel(ParamList)/numPanels_y);
-for p = 1:numel(ParamList)
-    
-    varVals = ncread(newNCfile,ParamList{p});
-    
-    subplot(numPanels_x, numPanels_y, p)
-    plot(newTime, varVals)
-    xlabel('time')
-    ylabel(ParamList{p})
-    title(ParamList{p})
+time_secs = ncread(nc_file,'time');
+timeAtr = ncreadatt(nc_file,'time','units');
+timeAtr_split = split(timeAtr,'since');
+timeAtr_units = strtrim(timeAtr_split{1});
 
+timeAtr_starDate = strtrim(timeAtr_split{2});
+timeAtr_starDate(strfind(timeAtr_starDate,' -'):end) = '';
+timeAtr_starDate = datevec(strtrim(timeAtr_starDate));
+
+if strcmp(timeAtr_units,'seconds')
+    time = datetime(timeAtr_starDate) + seconds(time_secs);
+elseif strcmp(timeAtr_units,'days')
+    time = datetime(timeAtr_starDate) + days(time_secs);
 end
 
-ncdisp(newNCfile)
+% Plot
+for p = 1:numel(Forcing_paramList)
+
+    varVals_old = ncread(nc_file,Forcing_paramList{p}{1});
+    varVals_new = ncread(newNCfile,Forcing_paramList{p}{1});
+
+    subplot(numPanels_x, numPanels_y, p)
+    plot(time, varVals_old, 'linewidth', 2)
+    hold on
+    plot(time, varVals_new, 'linewidth', 2)
+    xlabel('time')
+    ylabel(Forcing_paramList{p}{1})
+    legend('old','new')
+    datetick('x','keeplimits','keepticks')
+    grid on
+
+end
