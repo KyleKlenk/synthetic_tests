@@ -57,7 +57,7 @@ for test_i = 1:numel(tests_all)
     end
     
     % Output file
-    if test_num == 1; nc_output = '';
+    if test_num == 1; nc_output = 'openWQ_synthTests_timestep.nc';
     elseif test_num == 9; nc_output = 'openWQ_synthTests_timestep.nc';
     elseif test_num == 10; nc_output = 'openWQ_synthTests_timestep.nc';
     elseif test_num == 11; nc_output = 'openWQ_synthTests_timestep.nc';    
@@ -67,7 +67,7 @@ for test_i = 1:numel(tests_all)
     end
     
     % Forcing file
-    if test_num == 1; nc_forcing = '';
+    if test_num == 1; nc_forcing = 'openWQ_syntheticTests_Transp_forcing.nc';
     elseif test_num == 9; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';
     elseif test_num == 10; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';
     elseif test_num == 11; nc_forcing = 'openWQ_syntheticTests_BGC_forcing.nc';    
