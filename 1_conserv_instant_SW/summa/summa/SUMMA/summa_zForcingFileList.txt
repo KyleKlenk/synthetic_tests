@@ -5,4 +5,5 @@
 !  (1) The name of a forcing file
 !        --> filename must be in single quotes
 ! ****************************************************************************************************
- 'openWQ_syntheticTests_BGC_forcing.nc'
+! 'openWQ_syntheticTests_Transp_forcing.nc'
+'openWQ_syntheticTests_Transp_forcing_new.nc'
