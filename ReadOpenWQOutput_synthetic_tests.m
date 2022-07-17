@@ -128,6 +128,7 @@ for model_i = 1:numel(model_all)
                 plot_elemt_flag,...         % Flag to specify if to plot variables
                 extractElm_info,...         % If the flag above is 1, then provide details about the variables to plot
                 'HDF5',...                  % Output format
+                openwq_noWaterConcFlag,...  % No water concentration flag in openwq
                 true);    % Debug mode
 
             % Save Results
