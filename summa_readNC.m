@@ -160,7 +160,8 @@ for test_i = 1:numel(tests_all)
         end
         close(hbar)
         
-        % Plot
+        % Plot 
+        % can't be paralellized
     
         figure('Name', nc_file)   
         numPanels_y = ceil(numel(paramList)/2);
