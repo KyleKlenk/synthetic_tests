@@ -19,6 +19,7 @@ DataType_2exam_all = {...
     };
 
 % if choosing output, then select the parameters to plot
+hru_num = 3;
 Output_paramList = {
     'pptrate',...
     'averageRoutedRunoff',...
@@ -39,8 +40,6 @@ Output_paramList = {
     'scalarSoilBaseflow',...
     'scalarSoilDrainage',...    
     };
-
-hru_num = 1;
 
 % if choosing forcing, then select the parameters to plot
 Forcing_paramList = {
