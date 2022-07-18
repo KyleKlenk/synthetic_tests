@@ -157,6 +157,7 @@ for test_i = 1:numel(tests_all)
             varVals_compile{p} = varVals;
 
         end
+        close(hbar)
         
         % Plot
     
@@ -182,6 +183,7 @@ for test_i = 1:numel(tests_all)
             grid on
 
         end
+        close(hbar)
 
     end
 
