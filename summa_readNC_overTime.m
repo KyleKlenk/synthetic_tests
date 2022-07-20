@@ -25,7 +25,7 @@ DataType_2exam_all = {...
     };
 
 % if choosing output, then select the parameters to plot
-hru_num = 3;
+hru_num = 60;
 Output_paramList = {
     'pptrate',...
     'averageRoutedRunoff',...
@@ -169,6 +169,8 @@ for test_i = 1:numel(tests_all)
         % can't be paralellized
     
         figure('Name', nc_file)   
+        sgtitle(strcat('HRU = ', num2str(hru_num))) 
+        
         numPanels_y = ceil(numel(paramList)/2);
         numPanels_x = ceil(numel(paramList)/numPanels_y);
         

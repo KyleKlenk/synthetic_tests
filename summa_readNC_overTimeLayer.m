@@ -14,6 +14,7 @@ clear all
 
 % Runs to process
 model_name = 'summa'; % scriot only for summa (not applicable to CRHM)
+summaNoDataFlag = -9999;
 
 tests_all = [1,...
     ...9, 10, 11, 11.1 12, 13...
@@ -115,7 +116,7 @@ for test_i = 1:numel(tests_all)
     
         Warning_text = cell(numel(paramList),1);
     
-        parfor p = 1:numel(paramList)
+        for p = 1:numel(paramList)
             
             % update waitbar
             hbar.iterate(1);
@@ -150,11 +151,14 @@ for test_i = 1:numel(tests_all)
          
         % Get only multi-dimensional data
         varVals_compile_MultDim = varVals_compile(nonEmptyIndex);
+        paramList_multiDim = paramList(nonEmptyIndex);
         
         % Plot 
         % can't be paralellized
     
-        figure('Name', nc_file)   
+        figure('Name', nc_file)  
+        sgtitle(strcat('HRU = ', num2str(hru_num)))
+        
         numPanels_y = ceil(numel(varVals_compile_MultDim)/2);
         numPanels_x = ceil(numel(varVals_compile_MultDim)/numPanels_y);
         
@@ -170,13 +174,17 @@ for test_i = 1:numel(tests_all)
             % update waitbar
             hbar.iterate(1);
             
-            
+            % get var
             varVals = varVals_compile_MultDim{p};
             
+            % Convert summa's noData flag to nan so it doesn't show up
+            varVals(varVals == summaNoDataFlag) = NaN;
+             
             % Sometimes it varies, so needs to be updated for every
             % variable
             hru_seq = 1:1:numel(varVals(:,1));
-            
+     
+            % plot
             subplot(numPanels_x, numPanels_y, p)
             surf(time, hru_seq, varVals, varVals)
             shading interp
@@ -185,9 +193,9 @@ for test_i = 1:numel(tests_all)
             datetick('x','keeplimits','keepticks')
             grid on
             %view(2)
-            view(90,0)
+            view(0,90)
             colorbar
-            title(paramList{p})
+            title(paramList_multiDim{p})
             alpha 0.65
 
         end
