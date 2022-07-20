@@ -25,7 +25,8 @@ DataType_2exam_all = {...
     };
 
 % if choosing output, then select the parameters to plot
-hru_num = 60;
+layer_num = 60;
+
 Output_paramList = {
     'pptrate',...
     'averageRoutedRunoff',...
@@ -155,9 +156,11 @@ for test_i = 1:numel(tests_all)
             
             if strcmp(DataType_2exam, 'output')...
                     && (numel(size_varVals) > 2)
-                varVals = permute(varVals_all(:,hru_num,:),[1 3 2]);
+                varVals = permute(varVals_all(:,layer_num,:),[1 3 2]);
+                layeredVar{p} = true;
             else
                 varVals = varVals_all;
+                layeredVar{p} = false;
             end
             
             varVals_compile{p} = varVals;
@@ -169,7 +172,7 @@ for test_i = 1:numel(tests_all)
         % can't be paralellized
     
         figure('Name', nc_file)   
-        sgtitle(strcat('HRU = ', num2str(hru_num))) 
+        sgtitle(['HRU = ', num2str(layer_num)])
         
         numPanels_y = ceil(numel(paramList)/2);
         numPanels_x = ceil(numel(paramList)/numPanels_y);
@@ -190,6 +193,11 @@ for test_i = 1:numel(tests_all)
             ylabel(paramList{p})
             datetick('x','keeplimits','keepticks')
             grid on
+            if layeredVar{p} == true
+                title(['layer = ', num2str(layer_num)])
+            else
+               title('unlayered') 
+            end
 
         end
         close(hbar)

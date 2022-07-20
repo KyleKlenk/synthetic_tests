@@ -157,7 +157,6 @@ for test_i = 1:numel(tests_all)
         % can't be paralellized
     
         figure('Name', nc_file)  
-        sgtitle(strcat('HRU = ', num2str(hru_num)))
         
         numPanels_y = ceil(numel(varVals_compile_MultDim)/2);
         numPanels_x = ceil(numel(varVals_compile_MultDim)/numPanels_y);
@@ -189,7 +188,7 @@ for test_i = 1:numel(tests_all)
             surf(time, hru_seq, varVals, varVals)
             shading interp
             xlabel('time')
-            ylabel('hru')
+            ylabel('layer')
             datetick('x','keeplimits','keepticks')
             grid on
             %view(2)

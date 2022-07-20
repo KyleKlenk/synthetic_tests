@@ -11,8 +11,6 @@ clear all
 
 test_num = 1; % 1, 9, 10, 11, 11.1 12, 13
 
-n_hru = 105;
-
 Forcing_paramList = {
     {'LWRadAtm', 350},...
     {'SWRadAtm', 0},...
