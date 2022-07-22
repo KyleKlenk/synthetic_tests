@@ -172,7 +172,7 @@ for test_i = 1:numel(tests_all)
         % can't be paralellized
     
         figure('Name', nc_file)   
-        sgtitle(['HRU = ', num2str(layer_num)])
+        sgtitle(['Vertical Layer = ', num2str(layer_num)])
         
         numPanels_y = ceil(numel(paramList)/2);
         numPanels_x = ceil(numel(paramList)/numPanels_y);
