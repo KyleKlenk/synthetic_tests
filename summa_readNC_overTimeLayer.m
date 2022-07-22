@@ -161,7 +161,7 @@ for test_i = 1:numel(tests_all)
         numPanels_y = ceil(numel(varVals_compile_MultDim)/2);
         numPanels_x = ceil(numel(varVals_compile_MultDim)/numPanels_y);
         
-        hru_seq = 1:1:numel(varVals_compile_MultDim{1}(:,1));
+        layer_seq = 1:1:numel(varVals_compile_MultDim{1}(:,1));
         
         hbar = parfor_progressbar(...
         numel(varVals_compile_MultDim),...
@@ -181,11 +181,11 @@ for test_i = 1:numel(tests_all)
              
             % Sometimes it varies, so needs to be updated for every
             % variable
-            hru_seq = 1:1:numel(varVals(:,1));
+            layer_seq = 1:1:numel(varVals(:,1));
      
             % plot
             subplot(numPanels_x, numPanels_y, p)
-            surf(time, hru_seq, varVals, varVals)
+            surf(time, layer_seq, varVals, varVals)
             shading interp
             xlabel('time')
             ylabel('layer')
