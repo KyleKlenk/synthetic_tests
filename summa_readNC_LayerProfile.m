@@ -180,20 +180,25 @@ for test_i = 1:numel(tests_all)
             % Convert summa's noData flag to nan so it doesn't show up
             varVals(varVals == summaNoDataFlag) = NaN;
             
-            % Slice variable (at timestep_to_print)
-            varVals_layer = varVals(:,timestep_to_print);
-             
             % Sometimes it varies, so needs to be updated for every
             % variable
             layer_seq = 1:1:numel(varVals(:,1));
-     
-            % plot
-            subplot(numPanels_x, numPanels_y, p)
-            plot(varVals_layer, layer_seq)
-            xlabel('Var')
-            ylabel('layer')
-            grid on
-            title(paramList_multiDim{p})
+            
+            for tstep = 1:numel(timestep_to_print)
+                
+                % Slice variable (at timestep_to_print)
+                varVals_layer = varVals(:,timestep_to_print(tstep));
+
+                % plot
+                hold on
+                subplot(numPanels_x, numPanels_y, p)
+                plot(varVals_layer, layer_seq)
+                xlabel('Var')
+                ylabel('layer')
+                grid on
+                title(paramList_multiDim{p})
+                
+            end
 
         end
         close(hbar)
