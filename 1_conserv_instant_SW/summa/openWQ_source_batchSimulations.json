@@ -8,17 +8,19 @@
 		"Compartment_name": "SCALARAQUIFER",
 		"Type": "source",
 		"Units": "kg",
+		"Data_Format": "ASCII", // JSON
 		"Data": { 
 			// 11 fields (discrete) or 12 fields (continuous)
 			// YYYY,MM,DD,HH,MIN,SEC, ix,iy,iz,load, load type, time units (if continuous)
-			"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"],
-			"2": ["all","all","all","all","all","all","all","all","all",0.0001,"continuous","min"], // atmospheric deposition
-			"3": [2018,"all",4,6,30,30,1,1,1,100,"discrete"],										// some agriculture load 
-			"4": [2019,"all",4,6,30,"all",1,1,1,10,"continuous","min"],							// some agriculture load
-			"5": [2019,2,4,6,30,15,1,1,1,350,"discrete"]
-			//"3": [2017,11,20,6,30,"all",1,1,10,"discrete"],
-			//"4": [2018,"all","all",10,30,"all",1,1,20,"discrete"],
-			//"5": [2018,9,27,4,30,1,1,1,20000,"discrete"]
+			//"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"],
+			//"2": ["all","all","all","all","all","all","all","all","all",0.0001,"continuous","min"], // atmospheric deposition
+			//"3": [2018,"all",4,6,30,30,1,1,1,100,"discrete"],										// some agriculture load 
+			//"4": [2019,"all",4,6,30,"all",1,1,1,10,"continuous","min"],								// some agriculture load
+			//"5": [2019,2,4,6,30,15,1,1,1,350,"discrete"]
+			"Filepath": "SS_speciesA_ScalarAquifer_test.csv",
+			"Delimiter": ",",
+			"Number_of_header_rows": 3,
+			"Header_key_row": 3 
 		}
 	},
 	"2": {
@@ -26,11 +28,9 @@
 		"Compartment_name": "SCALARAQUIFER",
 		"Type": "source",
 		"Units": "kg",
-		"Data": { 
-			// YYYY,MM,DD,HH,ix,iy,iz,load
-			"1": [2016,"all",26,3,30,30,"all",1,1,0.5,"discrete"]
-			//"2": [2018,7,26,3,30,"all","all","all",20000],
-			//"3": [2019,7,26,3,30,"all",1,1,20000]
+		"Data_Format": "JSON",
+		"Data": {
+			"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"]
 		}
 	}
 }

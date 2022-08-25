@@ -24,7 +24,7 @@
             "1":{
                 "CONSUMED": "Nref",
                 "PRODUCED": "Nlab",
-                "KINETICS_PER_DAY": "Nref * k",
+                "KINETICS": ["Nref * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.006
@@ -33,7 +33,7 @@
             "2":{
                 "CONSUMED": "Nref",
                 "PRODUCED": "DON",
-                "KINETICS_PER_DAY": "Nref * k",
+                "KINETICS": ["Nref * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.0002
@@ -42,7 +42,7 @@
             "3":{
                 "CONSUMED": "Nlab",
                 "PRODUCED": "DON",
-                "KINETICS_PER_DAY": "Nlab * k",
+                "KINETICS": ["Nlab * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.0003
@@ -51,7 +51,7 @@
             "4":{
                 "CONSUMED": "Nlab",
                 "PRODUCED": "DIN",
-                "KINETICS_PER_DAY": "Nlab * k",
+                "KINETICS": ["Nlab * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.003
@@ -60,7 +60,7 @@
             "5":{
                 "CONSUMED": "DIN",
                 "PRODUCED": "N2",
-                "KINETICS_PER_DAY": "DIN * k",
+                "KINETICS": ["DIN * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.001
@@ -69,7 +69,7 @@
             "6":{
                 "CONSUMED": "DIN",
                 "PRODUCED": "PLANTS",
-                "KINETICS_PER_DAY": "DIN * k",
+                "KINETICS": ["DIN * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.001

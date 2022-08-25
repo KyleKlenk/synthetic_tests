@@ -7,6 +7,7 @@
 		"Chemical_name": "species_A",
 		"External_InputFlux_name": "PRECIP",
 		"Units": "mg/l",
+		"Data_Format": "JSON",
 		"Data": { // YYYY,MM,DD,HH,ix,iy,iz,load, load type
 		"1": ["all","all","all","all","all","all","all","all","all",-10]
 			//"2": [2018,"all",4,6,30,"all",1,1,10,"discrete"],
@@ -20,6 +21,7 @@
 		"External_InputFlux_name": "PRECIP",
 		"Type": "source",
 		"Units": "mg/l",
+		"Data_Format": "JSON",
 		"Data": { // YYYY,MM,DD,HH,ix,iy,iz,load
 			"1": [2016,"all",26,3,30,30,"all",1,1,0.5,"discrete"]
 			//"2": [2018,7,26,3,30,"all","all","all",20000],

@@ -17,7 +17,7 @@
             "1":{
                 "CONSUMED": "BOD",
                 "PRODUCED": "DEFICIT_OXYG",
-                "KINETICS_PER_DAY": "BOD * k",
+                "KINETICS": ["BOD * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.1
@@ -26,7 +26,7 @@
             "2":{
                 "CONSUMED": "DEFICIT_OXYG",
                 "PRODUCED": "DO",
-                "KINETICS_PER_DAY": "DEFICIT_OXYG * p",
+                "KINETICS": ["DEFICIT_OXYG * k","1/day"],
                 "PARAMETER_NAMES": ["p"],
                 "PARAMETER_VALUES":{
                     "p": 0.5
