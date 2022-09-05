@@ -5,7 +5,7 @@
             "1": "species_A",
             "2": "species_B"
         },
-        "BGC_general_mobile_species": []
+        "BGC_GENERAL_MOBILE_SPECIES": []
     },
     "CYCLING_FRAMEWORKS": {
         "BGQcycle_1": {
@@ -15,7 +15,7 @@
             "1":{
                 "CONSUMED": "species_A",
                 "PRODUCED": "species_B",
-                "KINETICS": ["species_A * k * Tsoil/100","1/day"],
+                "KINETICS": ["species_A * k * Tsoil_K/100","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.06

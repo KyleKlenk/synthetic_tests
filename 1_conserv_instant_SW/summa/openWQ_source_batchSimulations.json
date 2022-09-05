@@ -1,7 +1,7 @@
 {
 	"METADATA": {
-		"Comment": "synthetic loading",
-		"Source": "test_1"
+		"COMMENT": "synthetic loading",
+		"SOURCE": "test_1"
 	},
 	"1": {
 		"Chemical_name": "species_A",
