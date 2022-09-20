@@ -37,9 +37,21 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
 		"FORMAT": "HDF5", // HDF5, CSV (VTK has been disabled)
 		"CHEMICAL_SPECIES": ["species_A", "species_B"],
-		"UNITS": "kg",
+		"UNITS": "mg/l",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
+			"SCALARCANOPYWAT": {
+				"1": [1, 1, 1]
+			},
+			"ILAYERVOLFRACWAT_SNOW": {
+				"1": [1, 1, 1]
+			},
+			"RUNOFF": {
+				"1": [1, 1, 1]
+			},
+			"ILAYERVOLFRACWAT_SOIL": {
+				"1": [1, 1, 1]
+			},
 			"SCALARAQUIFER": {
 				"1": [1, 1, 1]
 			}

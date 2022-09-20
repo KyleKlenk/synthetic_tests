@@ -2,6 +2,34 @@
    
     "BIOGEOCHEMISTRY_CONFIGURATION":{
 
+        "SCALARCANOPYWAT":{
+            "CYCLING_FRAMEWORK": ["BGQcycle_1"],
+            "INITIAL_CONDITIONS":{
+                "species_A": [5,"mg"],
+                "species_B": [0,"mg"]
+            }
+        },
+        "ILAYERVOLFRACWAT_SNOW":{
+            "CYCLING_FRAMEWORK": ["BGQcycle_1"],
+            "INITIAL_CONDITIONS":{
+                "species_A": [5,"mg"],
+                "species_B": [0,"mg"]
+            }
+        },
+        "RUNOFF":{
+            "CYCLING_FRAMEWORK": ["BGQcycle_1"],
+            "INITIAL_CONDITIONS":{
+                "species_A": [5,"mg"],
+                "species_B": [0,"mg"]
+            }
+        },
+        "ILAYERVOLFRACWAT_SOIL":{
+            "CYCLING_FRAMEWORK": ["BGQcycle_1"],
+            "INITIAL_CONDITIONS":{
+                "species_A": [5,"mg"],
+                "species_B": [0,"mg"]
+            }
+        },
         "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{

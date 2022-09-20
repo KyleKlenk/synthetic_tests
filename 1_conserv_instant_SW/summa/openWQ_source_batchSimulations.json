@@ -5,7 +5,7 @@
 	},
 	"1": {
 		"Chemical_name": "species_A",
-		"Compartment_name": "SCALARAQUIFER",
+		"Compartment_name": "ILAYERVOLFRACWAT_SOIL",
 		"Type": "source",
 		"Units": "kg",
 		"Data_Format": "ASCII", // JSON
@@ -15,22 +15,22 @@
 			//"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"],
 			//"2": ["all","all","all","all","all","all","all","all","all",0.0001,"continuous","min"], // atmospheric deposition
 			//"3": [2018,"all",4,6,30,30,1,1,1,100,"discrete"],										// some agriculture load 
-			//"4": [2019,"all",4,6,30,"all",1,1,1,10,"continuous","min"],								// some agriculture load
+			"4": [2019,"all",4,6,30,"all",1,1,1,10,"continuous","min"],								// some agriculture load
 			//"5": [2019,2,4,6,30,15,1,1,1,350,"discrete"]
 			"Filepath": "SS_speciesA_ScalarAquifer_test.csv",
 			"Delimiter": ",",
 			"Number_of_header_rows": 3,
 			"Header_key_row": 3 
 		}
-	},
-	"2": {
-		"Chemical_name": "species_B",
-		"Compartment_name": "SCALARAQUIFER",
-		"Type": "source",
-		"Units": "kg",
-		"Data_Format": "JSON",
-		"Data": {
-			"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"]
-		}
-	}
+	}//,
+	//"2": {
+	//	"Chemical_name": "species_B",
+	//	"Compartment_name": "SCALARAQUIFER",
+	//	"Type": "source",
+	//	"Units": "kg",
+	//	"Data_Format": "JSON",
+	//	"Data": {
+	//		"1": ["all","all","all","all","all","all","all","all","all",0.0001,"discrete"]
+	//	}
+	//}
 }

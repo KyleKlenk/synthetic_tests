@@ -18,7 +18,7 @@
                 "KINETICS": ["species_A * k * Tsoil_K/100","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
-                    "k": 0.06
+                    "k": 0.0006
                 }
             }
         }

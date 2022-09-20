@@ -23,13 +23,15 @@ for model_i = 1:numel(model_all)
     model_name = model_all{model_i};
     
     if model_name == "crhm"
-            % crhm
-            results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/bin/Case_Studies/synthetic_tests';  
-            comptName = 'SOIL_RECHR';
+        % crhm
+        results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/bin/Case_Studies/synthetic_tests';  
+        comptName = 'SOIL_RECHR';
     elseif model_name == "summa"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests';
-        comptName = 'SCALARAQUIFER';
+        %comptName = 'SCALARCANOPYWAT';
+        comptName = 'ILAYERVOLFRACWAT';
+        %comptName = 'SCALARAQUIFER';
     end
     
     % Loop over tests
@@ -42,7 +44,7 @@ for model_i = 1:numel(model_all)
             Synthetic_test = '1_conserv_instant_SW';
 
             extractElm_info = {...
-                %strcat(comptName,'@SPECIES_A#MG/L'),[1,1,1];...
+                strcat(comptName,'@SPECIES_A#MG/L'),[1,1,1];...
                 %strcat(comptName,'@SPECIES_B#MG/L'),[1,1,1];...
                 %strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
                 %strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
