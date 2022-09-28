@@ -10,18 +10,18 @@
 	},
 	"OPENWQ_INPUT": {
 		"CONFIG_FILEPATH": "openWQ_config_1.json",
-		//"EXTERNAL_WATER_FLUXES": {
-		//	"1": {
-		//		"LABEL": "Rainfall",
-		//		"FILEPATH": "openWQ_rainfall_1.json"
-		//	}
-		//}//,
-		"SINK_SOURCE": {
+		"EXTERNAL_WATER_FLUXES": {
 			"1": {
-				"LABEL": "Load_1_test",
-				"FILEPATH": "openWQ_source_batchSimulations.json"
+				"LABEL": "Rainfall",
+				"FILEPATH": "openWQ_rainfall_1.json"
 			}
-		}
+		}//,
+		//"SINK_SOURCE": {
+		//	"1": {
+		//		"LABEL": "Load_1_test",
+		//		"FILEPATH": "openWQ_source_batchSimulations.json"
+		//	}
+		//}
 	},
 	"MODULES": {
 		"BIOGEOCHEMISTRY": {
@@ -29,7 +29,8 @@
 			"MODULE_CONFIG_FILEPATH": "openWQ_MODULE_BGC_cycling_1.json"
 		},
 		"TRANSPORT_EROSION": {
-			"MODULE_NAME": "OPENWQ_NATIVE_TE_NO_ADVDISP", // needed for CRHM because it already uses its native transport routined
+			//"MODULE_NAME": "OPENWQ_NATIVE_TE_NO_ADVDISP", // needed for CRHM because it already uses its native transport routined
+			"MODULE_NAME": "OPENWQ_NATIVE_TE_ADVP", // needed for CRHM because it already uses its native transport routined
 			"MODULE_CONFIG_FILEPATH": "openWQ_MODULE_TE_batchSimulations.json"
 		}
 	},
@@ -37,7 +38,7 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
 		"FORMAT": "HDF5", // HDF5, CSV (VTK has been disabled)
 		"CHEMICAL_SPECIES": ["species_A", "species_B"],
-		"UNITS": "mg",
+		"UNITS": "kg",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
 			//"SCALARCANOPYWAT": {

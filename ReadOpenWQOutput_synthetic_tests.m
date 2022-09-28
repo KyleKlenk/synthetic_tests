@@ -44,19 +44,20 @@ for model_i = 1:numel(model_all)
             Synthetic_test = '1_conserv_instant_SW';
 
             extractElm_info = {...
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,1];
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,5];
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,20];
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,30];
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,60];
-                %strcat(comptName,'@SPECIES_A#KG'),[1,1,90];
                 
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,1];
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,5];
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,20];
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,30];
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,60];
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,90];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,1];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,5];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,20];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,30];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,60];
+                %strcat(comptName,'@SPECIES_A#MG'),[1,1,90];
+                
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,1];
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,5];
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,20];
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,30];
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,60];
+                strcat(comptName,'@SPECIES_A#KG'),[1,1,90];
                 
                 %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,1];
                 %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,5];

@@ -5,7 +5,7 @@
             "1": "species_A",
             "2": "species_B"
         },
-        "BGC_GENERAL_MOBILE_SPECIES": []
+        "BGC_GENERAL_MOBILE_SPECIES": [1, 2]
     },
     "CYCLING_FRAMEWORKS": {
         "BGQcycle_1": {
