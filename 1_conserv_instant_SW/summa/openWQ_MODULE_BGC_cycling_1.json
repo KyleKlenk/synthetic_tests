@@ -15,10 +15,10 @@
             "1":{
                 "CONSUMED": "species_A",
                 "PRODUCED": "species_B",
-                "KINETICS": ["species_A * k * Tsoil_K/100","1/day"],
+                "KINETICS": ["species_A * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
-                    "k": 0.0006
+                    "k": 0.0000
                 }
             }
         }

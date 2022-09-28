@@ -10,12 +10,12 @@
 	},
 	"OPENWQ_INPUT": {
 		"CONFIG_FILEPATH": "openWQ_config_1.json",
-		"EXTERNAL_WATER_FLUXES": {
-			"1": {
-				"LABEL": "Rainfall",
-				"FILEPATH": "openWQ_rainfall_1.json"
-			}
-		},
+		//"EXTERNAL_WATER_FLUXES": {
+		//	"1": {
+		//		"LABEL": "Rainfall",
+		//		"FILEPATH": "openWQ_rainfall_1.json"
+		//	}
+		//}//,
 		"SINK_SOURCE": {
 			"1": {
 				"LABEL": "Load_1_test",
@@ -37,24 +37,29 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
 		"FORMAT": "HDF5", // HDF5, CSV (VTK has been disabled)
 		"CHEMICAL_SPECIES": ["species_A", "species_B"],
-		"UNITS": "mg/l",
+		"UNITS": "mg",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
-			"SCALARCANOPYWAT": {
-				"1": [1, 1, 1]
-			},
-			"ILAYERVOLFRACWAT_SNOW": {
-				"1": [1, 1, 1]
-			},
-			"RUNOFF": {
-				"1": [1, 1, 1]
-			},
+			//"SCALARCANOPYWAT": {
+			//	"1": [1, 1, 1]
+			//},
+			//"ILAYERVOLFRACWAT_SNOW": {
+			//	"1": [1, 1, 1]
+			//},
+			//"RUNOFF": {
+			//	"1": [1, 1, 1]
+			//},
 			"ILAYERVOLFRACWAT_SOIL": {
-				"1": [1, 1, 1]
-			},
-			"SCALARAQUIFER": {
-				"1": [1, 1, 1]
-			}
+				"1": [1, 1, 1],
+				"2": [1, 1, 5],
+				"3": [1, 1, 20],
+				"4": [1, 1, 30],
+				"5": [1, 1, 60],
+				"6": [1, 1, 90]
+			}//,
+			//"SCALARAQUIFER": {
+			//	"1": [1, 1, 1]
+			//}
 		},
 		"TIMESTEP": [1, "day"]
 	}

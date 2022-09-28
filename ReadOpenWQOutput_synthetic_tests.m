@@ -30,7 +30,7 @@ for model_i = 1:numel(model_all)
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests';
         %comptName = 'SCALARCANOPYWAT';
-        comptName = 'ILAYERVOLFRACWAT';
+        comptName = 'ILAYERVOLFRACWAT_SOIL';
         %comptName = 'SCALARAQUIFER';
     end
     
@@ -44,12 +44,26 @@ for model_i = 1:numel(model_all)
             Synthetic_test = '1_conserv_instant_SW';
 
             extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG/L'),[1,1,1];...
-                %strcat(comptName,'@SPECIES_B#MG/L'),[1,1,1];...
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
-                %strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,1];
-                %strcat(comptName,'@SPECIES_B#KG'),[1,1,1];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,1];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,5];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,20];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,30];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,60];
+                %strcat(comptName,'@SPECIES_A#KG'),[1,1,90];
+                
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,1];
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,5];
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,20];
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,30];
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,60];
+                strcat(comptName,'@SPECIES_A#MG'),[1,1,90];
+                
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,1];
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,5];
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,20];
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,30];
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,60];
+                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,90];
                 };
 
         elseif test == 9
@@ -105,8 +119,8 @@ for model_i = 1:numel(model_all)
 
 
         %% ================================================================================================
-            % DON'T CHANGE BELOW ==============================================================================
-            % ================================================================================================
+        % DON'T CHANGE BELOW ==============================================================================
+        % ================================================================================================
         if ExtrVisData == true
 
 

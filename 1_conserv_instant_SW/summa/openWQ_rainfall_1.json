@@ -9,8 +9,8 @@
 		"Units": "mg/l",
 		"Data_Format": "JSON",
 		"Data": {
-			// YYYY,MM,DD,HH,MIN,SEC, ix,iy,iz,load, load type, time units (if continuous)
-			"1": ["all","all","all","all","all","all","all","all",1,2,"discrete"]
+			// YYYY,MM,DD,HH,MIN,SEC, ix,iy,iz,load
+			"1": ["all","all","all","all","all","all","all","all",1,2]
 			//"2": [2018,"all",4,6,30,"all",1,1,10,"discrete"],
 			//"3": [2017,11,20,6,30,"all",1,1,10,"discrete"],
 			//"4": [2018,"all","all",10,30,"all",1,1,20,"discrete"],
