@@ -5,7 +5,7 @@
 function NumVSAnalytical
 clc
 close all
-clear ll
+clear all
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INPUT DATA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

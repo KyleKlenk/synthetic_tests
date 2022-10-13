@@ -1,21 +1,67 @@
 
-% Read project results: HDF5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INPUT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-ExtrVisData = true;
+% Read project results: HDF5
 outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/synthTestT_results';
 
 % Runs to process
 model_all = {...'crhm',...
             'summa'};
-tests_all = [1,...
-    ...9, 10, 11, 11.1 12, 13...
+tests_all = [8,...
+    ...4,8,9, 10, 11, 11.1 12, 13...
     ];
 
-openwq_noWaterConcFlag = -9999;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%
+% Extraction settings
+extrData_flag = true;
+debugMode_flag = true;
+
+% Plot settings
+plot_TimeX_ConcY_perElement_flag = false;
+
+plot_ConcX_ZProfileY_perTime_flag = true;
+tStart_sec = seconds([... % hour
+                    ...0,...
+                    ...60 * 60,...
+                    ...60 * 60 * 2,...
+                    ...60 * 60 * 5,...
+                    ...60 * 60 * 10,...
+                    ...60 * 60 * 24,...
+                    ...60 * 60 * 24 * 3,...
+                    ...60 * 60 * 24 * 8,...
+                    60 * 60 * 24 * 15,...
+                    60 * 60 * 24 * 70,...
+                    60 * 60 * 24 * 120,...
+                    ]);
+%tStart_sec = seconds([... % day
+%                    0,...
+%                    60 * 60 * 24,...
+%                    60 * 60 * 24 * 3,...
+%                    60 * 60 * 24 * 8,...
+%                    60 * 60 * 24 * 20,...
+%                    60 * 60 * 24 * 40,...
+%                    60 * 60 * 24 * 160,...
+%                    60 * 60 * 24 * 400,...
+%                    ]);
+requestProfileAPI = containers.Map(...
+                    {'Profile', 'layer_m_interval', 'ReverseAxis_XY', 'TimeStamps'},...
+                    {...
+                        'z(x=1,y=1)',...
+                        0.006,...
+                        {true, true}, ...
+                        datetime('1-Sep-2017 12:15:00') + tStart_sec...
+                     });
+
+openwq_noWaterConc_Val = -9999;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start Processing
-%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Loop over models
 for model_i = 1:numel(model_all)
@@ -30,6 +76,7 @@ for model_i = 1:numel(model_all)
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests';
         %comptName = 'SCALARCANOPYWAT';
+        %comptName = 'RUNOFF';
         comptName = 'ILAYERVOLFRACWAT_SOIL';
         %comptName = 'SCALARAQUIFER';
     end
@@ -39,34 +86,24 @@ for model_i = 1:numel(model_all)
 
         test = tests_all(test_num);
         
-        if test == 1
+        if test == 4
 
-            Synthetic_test = '1_conserv_instant_SW';
+            Synthetic_test = '4_nrTrans_contS_PorMedia';
 
             extractElm_info = {...
-                
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,1];
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,5];
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,20];
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,30];
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,60];
-                %strcat(comptName,'@SPECIES_A#MG'),[1,1,90];
-                
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,1];
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,5];
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,20];
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,30];
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,60];
-                strcat(comptName,'@SPECIES_A#KG'),[1,1,90];
-                
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,1];
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,5];
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,20];
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,30];
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,60];
-                %strcat(comptName,'@SPECIES_A#MG|L'),[1,1,90];
+                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                     repelem(1,100);
+                                                     1:100]';
                 };
+        elseif test == 8
 
+            Synthetic_test = '8_nrTrans_contS_PorMedia_linDecay';
+
+            extractElm_info = {...
+                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                     repelem(1,100);
+                                                     1:100]';
+                };
         elseif test == 9
             Synthetic_test = '9_batch_singleSp_1storder';
 
@@ -122,28 +159,52 @@ for model_i = 1:numel(model_all)
         %% ================================================================================================
         % DON'T CHANGE BELOW ==============================================================================
         % ================================================================================================
-        if ExtrVisData == true
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % EXTARCT DATA
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        if extrData_flag == true
 
 
             openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
             addpath(openwq_readfuncs_dir)
 
-            plot_elemt_flag = true;
-
             folderpath = strcat(results_dir, '/', Synthetic_test,'/', model_name,'/Output_OpenWQ/');
 
             output_openwq_tscollect_all = read_OpenWQ_outputs(...
-                openwq_readfuncs_dir,...    % Fullpath for needed functions
-                folderpath,...              % Provide fullpath to directory where the HDF5 files are located
-                plot_elemt_flag,...         % Flag to specify if to plot variables
-                extractElm_info,...         % If the flag above is 1, then provide details about the variables to plot
-                'HDF5',...                  % Output format
-                openwq_noWaterConcFlag,...  % No water concentration flag in openwq
-                true);    % Debug mode
+                openwq_readfuncs_dir,...        % Fullpath for needed functions
+                folderpath,...                  % Provide fullpath to directory where the HDF5 files are located
+                extractElm_info,...             % If the flag above is 1, then provide details about the variables to plot
+                'HDF5',...                      % Output format 
+                debugMode_flag);                % Debug mode
 
             % Save Results
             save(strcat(outputFolder,'/',model_name, '/', Synthetic_test,'.mat'), 'output_openwq_tscollect_all');
 
         end
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Plot elements
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        % TimeX_ConcY_perElement
+        if plot_TimeX_ConcY_perElement_flag == true
+
+            plot_OpenWQ_outputs_TimeX_ConcY_perElement(...
+                output_openwq_tscollect_all,...
+                openwq_noWaterConc_Val);  % No water concentration flag in openwq
+
+        end
+        
+        % ConcX_ZProfileY_perTime
+        if plot_ConcX_ZProfileY_perTime_flag == true
+                 
+             plot_OpenWQ_outputs_ConcX_ZProfileY_perTime(...
+                output_openwq_tscollect_all,...
+                requestProfileAPI,...     % profile request, e.g., "z(x=1,y=1)"
+                openwq_noWaterConc_Val);  % No water concentration flag in openwq
+            
+        end
+        
     end
 end
