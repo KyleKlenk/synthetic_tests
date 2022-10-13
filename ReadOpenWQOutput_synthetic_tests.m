@@ -9,8 +9,8 @@ outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scien
 % Runs to process
 model_all = {...'crhm',...
             'summa'};
-tests_all = [4,...
-    ...4,8,9, 10, 11, 11.1 12, 13...
+tests_all = [2,...
+    ...2, 4,8,9, 10, 11, 11.1 12, 13...
     ];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,7 +86,17 @@ for model_i = 1:numel(model_all)
 
         test = tests_all(test_num);
         
-        if test == 4
+        if test == 2
+
+            Synthetic_test = '2_nrTrans_instS_PorMedia';
+
+            extractElm_info = {...
+                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                     repelem(1,100);
+                                                     1:100]';
+                };
+        
+        elseif test == 4
 
             Synthetic_test = '4_nrTrans_contS_PorMedia';
 

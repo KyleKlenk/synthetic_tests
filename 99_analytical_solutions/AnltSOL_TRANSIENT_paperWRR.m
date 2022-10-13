@@ -5,21 +5,25 @@
 function AnltSOL_TRANSIENT_paperWRR
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% INPUT DATA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHOOSE TEST %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-test = 8; % 2, 4, 6, 8, 
+% test = 2; % 2_nrTrans_instS_PorMedia
+% test = 4; % 4_nrTrans_contS_PorMedia
+% test = 6; % 6_nrTrans_instS_PorMedia_linDecay
+% test = 8; % 8_nrTrans_contS_PorMedia_linDecay
+ 
+test = 2; 
 
-% General %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ny = 600;
-C0 = 2;
-mLayerDepth_summa_m         = 0.006;                        % m
-Dy      = 0.0001;      	% longiitudinal dispersivity - y-direction m2/s
-specificYield = 0.25;
-iLayerLiqFluxSoil_summa_m_s = 1.0359700931174889e-05 / specificYield;       % m/s
-%iLayerLiqFluxSoil_summa_m3  = 0.30488599840555514;         % m3/s
-V = iLayerLiqFluxSoil_summa_m_s;
-%L = V * 60 * 60 * 24 * 20 / 1000;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General mdoel setup %%%%%%%%%%%%%%%%%%%%%
+% Don't change
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ny                          = 600;          % number of layers (in mm)
+mLayerDepth_summa_m         = 0.006;        % m
+Dy                          = 0.0001;      	% longiitudinal dispersivity - y-direction m2/s
+specificYield               = 0.25;         % (-)
+iLayerLiqFluxSoil_summa_m_s = 1.0359700931174889e-05;
 
 tsim = [...
         ...0,...
@@ -28,9 +32,15 @@ tsim = [...
         60 * 60 * 24 * 120,...
         ];
 
+% Preliminary calcs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Intersticial flow velocity because of specific yield
+iLayerLiqFluxSoil_summa_m_s_intersticial =...
+    iLayerLiqFluxSoil_summa_m_s / specificYield;       % m/s
+
+V = iLayerLiqFluxSoil_summa_m_s_intersticial;
+%L = V * 60 * 60 * 24 * 20 / 1000;
 
 % Storing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-storage.C0 = C0;
 storage.Dy = Dy;
 storage.tsim = tsim;
 storage.V = V;
@@ -44,16 +54,40 @@ for ti = 1:n_ti
     
     if test == 4 || test == 8 
         
+        % Input concentration (continuous)
+        C0 = 2;
+         
         % Set reation rate
         if test == 4; r = 0; end                % conservative
         if test == 8; r = 0.01/(60*60*24); end  % linear decay
+        storage.C0 = C0;
         storage.r = r;
-        save InputData storage
+        save InputData storage;
         
         % Call analytical solver
         Analytical_calc_1D_contS(tsim_i)
         
-    elseif test ==2 || test == 6
+    elseif test == 2 || test == 6
+        
+        % Input mass (instantaneous)
+        M = 0.350;
+        
+        % Mass of the receiving node
+        mLayerVolFracWat_summa_m3 = 39.376154283055975;
+        UpLayVol = mLayerVolFracWat_summa_m3;
+        UpLayVol = 1;
+        
+        % Set reaction rate
+        if test == 2; r = 0; end                % conservative
+        if test == 6; r = 0.01/(60*60*24); end  % linear decay
+        
+        storage.M = M;
+        storage.UpLayVol = UpLayVol;
+        storage.r = r;
+        save InputData storage;
+        
+        % Call analytical solver
+        Analytical_calc_1D_instS(tsim_i)
         
     end
     %Analytical_calc_1D_2(tsim_i)
@@ -292,6 +326,58 @@ for y=1:ny
 
 end
 
+close(h)
+
+disp('Analytical solution calculation: OK')
+
+storage.C_analytical = Cfinal';
+save AnalytSOL storage;
+
+function Analytical_calc_1D_instS(tsim_i)
+
+load InputData storage
+M=storage.M;
+UpLayVol=storage.UpLayVol;
+Dy=storage.Dy;
+r=storage.r;
+V=storage.V;
+ny=storage.ny;
+
+% Loading point
+Yc=1;
+
+% porosity
+n = 1; % not needed because it's accounted for in the intersticil flow velocity
+Cfinal=zeros(1,ny);
+
+h=waitbar(0,'ANALYTICAL solution: calculating...');
+
+    
+for y=1:ny
+    
+    waitbar(y/ny)
+
+    % calculation of A
+
+    A = (M / UpLayVol) /...
+        ( 4*n*pi()*(Dy)^(0.5) );
+
+    % calculation of B
+    B = exp(...
+            V*(y-Yc)/ ...
+            (2*Dy));
+
+    D = exp( ...
+            -( V^2 / (4*Dy) + r) * tsim_i ...
+            -( (y-Yc)^2 ./ (4 * Dy * tsim_i))) ;
+
+    % Final calculation
+    C = A * B * D;
+
+    % Saving results
+    Cfinal(1,y) = C;
+   
+end
 close(h)
 
 disp('Analytical solution calculation: OK')
