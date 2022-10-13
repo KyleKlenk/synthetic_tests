@@ -20,25 +20,36 @@ test = 2;
 % Don't change
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ny                          = 600;          % number of layers (in mm)
-mLayerDepth_summa_m         = 0.006;        % m
 Dy                          = 0.0001;      	% longiitudinal dispersivity - y-direction m2/s
-specificYield               = 0.25;         % (-)
-iLayerLiqFluxSoil_summa_m_s = 1.0359700931174889e-05;
-
-tsim = [...
-        ...0,...
-        60 * 60 * 24 * 15,...
-        60 * 60 * 24 * 70,...
-        60 * 60 * 24 * 120,...
-        ];
+specificYield               = 0.23;         % (-)
+iLayerLiqFluxSoil_summa_m_s = 1.0359700931174889e-08; % m/s
+mLayerDepth_summa_m         = 0.006;        % m
 
 % Preliminary calcs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Intersticial flow velocity because of specific yield
-iLayerLiqFluxSoil_summa_m_s_intersticial =...
-    iLayerLiqFluxSoil_summa_m_s / specificYield;       % m/s
+iLayerLiqFluxSoil_summa_mm_s = iLayerLiqFluxSoil_summa_m_s * 1000; % mm/s
+iLayerLiqFluxSoil_summa_mm_s_intersticial =...
+    iLayerLiqFluxSoil_summa_mm_s / specificYield;       % m/s
 
-V = iLayerLiqFluxSoil_summa_m_s_intersticial;
+V = iLayerLiqFluxSoil_summa_mm_s_intersticial;
 %L = V * 60 * 60 * 24 * 20 / 1000;
+
+mLayerDepth_summa_mm = mLayerDepth_summa_m * 1000;
+
+% Time steps
+if test == 4 || test == 8 
+    tsim = [...
+            60 * 60 * 24 * 15,...
+            60 * 60 * 24 * 70,...
+            60 * 60 * 24 * 120,...
+            ];
+elseif test == 2 || test == 6 
+    tsim = [...
+            60 * 60 * 24 * 55,...
+            60 * 60 * 24 * 85,...
+            60 * 60 * 24 * 120,...
+            ];
+end
 
 % Storing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 storage.Dy = Dy;
@@ -70,20 +81,30 @@ for ti = 1:n_ti
     elseif test == 2 || test == 6
         
         % Input mass (instantaneous)
-        M = 0.350;
+        M = 350;
         
         % Mass of the receiving node
-        mLayerVolFracWat_summa_m3 = 39.376154283055975;
-        UpLayVol = mLayerVolFracWat_summa_m3;
-        UpLayVol = 1;
+        mLayerVolFracLiq = [0.2007, 0.2014, 0.2020, 0.2027, 0.2034, 0.2041, 0.2048, 0.2055, 0.2063, 0.2070, 0.2077, 0.2085, 0.2093, 0.2101, 0.2109, 0.2117, 0.2125, 0.2133, 0.2141, 0.2150, 0.2159, 0.2167, 0.2176, 0.2185, 0.2194, 0.2204, 0.2213, 0.2223, 0.2232, 0.2242, 0.2252, 0.2262, 0.2272, 0.2283, 0.2293, 0.2304, 0.2315, 0.2326, 0.2337, 0.2348, 0.2360, 0.2372, 0.2384, 0.2396, 0.2408, 0.2420, 0.2433, 0.2446, 0.2459, 0.2472, 0.2485, 0.2499, 0.2513, 0.2527, 0.2541, 0.2555, 0.2570, 0.2584, 0.2599, 0.2615, 0.2630, 0.2646, 0.2662, 0.2678, 0.2694, 0.2711, 0.2727, 0.2744, 0.2761, 0.2779, 0.2796, 0.2814, 0.2832, 0.2850, 0.2869, 0.2888, 0.2906, 0.2925, 0.2945, 0.2964, 0.2984, 0.3003, 0.3023, 0.3043, 0.3063, 0.3083, 0.3104, 0.3124, 0.3145, 0.3165, 0.3186, 0.3206, 0.3227, 0.3247, 0.3268, 0.3288, 0.3308, 0.3328, 0.3348, 0.3368];
+        hru_area_m2      = 32700;
+        
+        mLayerVolFracWat_summa_m3 = mLayerVolFracLiq * hru_area_m2 * mLayerDepth_summa_m;
+        mLayerVolFracWat_summa_mm_m2 = mLayerVolFracLiq * hru_area_m2 * mLayerDepth_summa_m * 1000;
+        UpLayVol_mm_m2 = mLayerVolFracWat_summa_m3 * 1000; % to mm*m2
+        
+        iLayerLiqFluxSoil_summa_mm_s = iLayerLiqFluxSoil_summa_m_s * 1000;
         
         % Set reaction rate
         if test == 2; r = 0; end                % conservative
         if test == 6; r = 0.01/(60*60*24); end  % linear decay
         
         storage.M = M;
-        storage.UpLayVol = UpLayVol;
+        storage.UpLayVol_mm_m2 = UpLayVol_mm_m2;
+        storage.mLayerVolFracWat_summa_mm_m2 = mLayerVolFracWat_summa_mm_m2;
+        storage.mLayerVolFracLiq = mLayerVolFracLiq;
         storage.r = r;
+        storage.mLayerDepth_summa_mm = mLayerDepth_summa_mm;
+        storage.iLayerLiqFluxSoil_summa_mm_s = iLayerLiqFluxSoil_summa_mm_s;
+        storage.hru_area_m2 =  hru_area_m2;
         save InputData storage;
         
         % Call analytical solver
@@ -95,7 +116,7 @@ for ti = 1:n_ti
     %Analytical_calc_1D_justAdv(tsim_i, mLayerDepth_summa_m)
     %Analytical_calc_2D
     %Numerical_calc
-    Compare_plot(ti, n_ti, tsim_i,mLayerDepth_summa_m)
+    Compare_plot(ti, n_ti, tsim_i,mLayerDepth_summa_mm)
     
 end
 
@@ -333,34 +354,57 @@ disp('Analytical solution calculation: OK')
 storage.C_analytical = Cfinal';
 save AnalytSOL storage;
 
+
+% 1D, instantaneous source, Eq. 76 of 
+% USGS Chapter B7
+% ANALYTICAL SOLUTIONS FOR ONE-, TWO-, AND THREE-DIMENSIONAL SOLUTE
+%TRANSPORT IN GROUND-WATER SYSTEMS WITH UNIFORM FLOW
 function Analytical_calc_1D_instS(tsim_i)
 
 load InputData storage
-M=storage.M;
-UpLayVol=storage.UpLayVol;
-Dy=storage.Dy;
-r=storage.r;
-V=storage.V;
-ny=storage.ny;
+M = storage.M;
+UpLayVol_mm_m2 = storage.UpLayVol_mm_m2;
+mLayerVolFracLiq = storage.mLayerVolFracLiq;
+Dy = storage.Dy;
+r = storage.r;
+V = storage.V;
+ny = storage.ny;
+hru_area_m2 = storage.hru_area_m2;
+mLayerVolFracWat_summa_mm_m2 = storage.mLayerVolFracWat_summa_mm_m2;
+mLayerDepth_summa_mm = storage.mLayerDepth_summa_mm;
+iLayerLiqFluxSoil_summa_mm_s = storage.iLayerLiqFluxSoil_summa_mm_s;
 
 % Loading point
 Yc=1;
-
 % porosity
 n = 1; % not needed because it's accounted for in the intersticil flow velocity
+
+% Mass injection unit of aquifer thickness (and area because it's 1D)
+% M (g/m3), Vol = m3/s, M_unitVol = 
+UpLayVol_m3 = UpLayVol_mm_m2 * 1000;
+M_unitVol = M / UpLayVol_m3(1);
+M_unitVol = M * (iLayerLiqFluxSoil_summa_mm_s);
+
+M_unitVol = M / ((mLayerDepth_summa_mm / 1000) * mLayerVolFracLiq(1) * hru_area_m2);
+M_unitVol = M_unitVol * ( 4 * n * pi() * Dy );
+
+M_unitVol = 1.8/1000 * ( 4 * n * pi() * Dy ) / 1.75;
+
+%M_nunitVol = 350 / (0.006 * 0.2 * 32700);
+
+
 Cfinal=zeros(1,ny);
 
 h=waitbar(0,'ANALYTICAL solution: calculating...');
 
-    
 for y=1:ny
     
     waitbar(y/ny)
 
     % calculation of A
 
-    A = (M / UpLayVol) /...
-        ( 4*n*pi()*(Dy)^(0.5) );
+    A = (M_unitVol) /...
+        ( 4 * n * pi() * Dy );
 
     % calculation of B
     B = exp(...
@@ -380,9 +424,20 @@ for y=1:ny
 end
 close(h)
 
+% Get the effect of dilution because of different layer volumes
+% 1) Using cubic spline to extrapolate for all sub-layers because the
+% analytical solution has 1 mm of resolution, while the model has 6 mm
+mLayerVolFracLiq_interp = spline(...
+    1:6:600,...
+    mLayerVolFracLiq,...
+    1:1:600);
+%figure;plot(mLayerVolFracLiq_interp^0.5,[1:1:600]/1000); set(gca,"Ydir","reverse"); set(gca,"Xdir","reverse");
+
+Cfinal_corr = Cfinal * mLayerVolFracLiq_interp(1) ./ mLayerVolFracLiq_interp;
+
 disp('Analytical solution calculation: OK')
 
-storage.C_analytical = Cfinal';
+storage.C_analytical = Cfinal_corr';
 save AnalytSOL storage;
 
 function Analytical_calc_2D
@@ -480,6 +535,7 @@ title(['Time since load start: ', num2str(tsim_i/(24*60*60)), ' days'])
 legend('Analytical Solution')
 set (gca,'Xdir','reverse')
 grid on
+hold on
 
 
 disp('ANALYTICAL and NUMERICAL solutions compared: OK')
