@@ -13,9 +13,8 @@ model_all = {...'crhm',...
 % test = 4; % 4_nrTrans_contS_PorMedia
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
-tests_all = [2,...
-    ...2, 4,8,9, 10, 11, 11.1 12, 13...
-    ];
+% test = 9, 10, 11, 11.1 12, 13 % chemistry
+test = 6;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -37,6 +36,7 @@ if test == 4 || test == 8
                         ]);
 elseif test == 2 || test == 6 
     tStart_sec = seconds([...
+                        ...0,...
                         60 * 60 * 24 * 55,...
                         60 * 60 * 24 * 85,...
                         60 * 60 * 24 * 120,...
@@ -86,140 +86,146 @@ for model_i = 1:numel(model_all)
         %comptName = 'SCALARAQUIFER';
     end
     
-    % Loop over tests
-    for test_num = 1:numel(tests_all)
-
-        test = tests_all(test_num);
         
-        if test == 2
+    if test == 2
 
-            Synthetic_test = '2_nrTrans_instS_PorMedia';
+        Synthetic_test = '2_nrTrans_instS_PorMedia';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
-                                                     repelem(1,100);
-                                                     1:100]';
-                };
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                 repelem(1,100);
+                                                 1:100]';
+            };
+
+    elseif test == 4
+
+        Synthetic_test = '4_nrTrans_contS_PorMedia';
+
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                 repelem(1,100);
+                                                 1:100]';
+            };
+    
+    elseif test == 6
+
+    Synthetic_test = '6_nrTrans_instS_PorMedia_linDecay';
+
+    extractElm_info = {...
+        strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                             repelem(1,100);
+                                             1:100]';
+        };
         
-        elseif test == 4
+    elseif test == 8
 
-            Synthetic_test = '4_nrTrans_contS_PorMedia';
+        Synthetic_test = '8_nrTrans_contS_PorMedia_linDecay';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
-                                                     repelem(1,100);
-                                                     1:100]';
-                };
-        elseif test == 8
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                 repelem(1,100);
+                                                 1:100]';
+            };
+    elseif test == 9
+        Synthetic_test = '9_batch_singleSp_1storder';
 
-            Synthetic_test = '8_nrTrans_contS_PorMedia_linDecay';
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG'),[1,1,1]
+            };
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
-                                                     repelem(1,100);
-                                                     1:100]';
-                };
-        elseif test == 9
-            Synthetic_test = '9_batch_singleSp_1storder';
+    elseif test == 10
+        Synthetic_test = '10_batch_singleSp_2ndorder';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,1]
-                };
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#G'),[1,1,1]
+            };
 
-        elseif test == 10
-            Synthetic_test = '10_batch_singleSp_2ndorder';
+    elseif test == 11
+        Synthetic_test = '11_batch_2species';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#G'),[1,1,1]
-                };
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
+            strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
+            };
 
-        elseif test == 11
-            Synthetic_test = '11_batch_2species';
+    elseif test == 11.1
+        Synthetic_test = '11_1_batch_3species';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
-                strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
-                };
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
+            strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
+            strcat(comptName,'@SPECIES_C#MG'),[1,1,1];...
+            };
 
-        elseif test == 11.1
-            Synthetic_test = '11_1_batch_3species';
+    elseif test == 12
+        Synthetic_test = '12_batch_nitrogencycle';
 
-            extractElm_info = {...
-                strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
-                strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
-                strcat(comptName,'@SPECIES_C#MG'),[1,1,1];...
-                };
+        extractElm_info = {...
+            strcat(comptName,'@Nref#MG'),[1,1,1];...
+            strcat(comptName,'@Nlab#MG'),[1,1,1];...
+            strcat(comptName,'@DON#MG'),[1,1,1];...
+            strcat(comptName,'@DIN#MG'),[1,1,1]
+            };    
 
-        elseif test == 12
-            Synthetic_test = '12_batch_nitrogencycle';
+    elseif test == 13
+        Synthetic_test = '13_batch_oxygenBODcycle';
 
-            extractElm_info = {...
-                strcat(comptName,'@Nref#MG'),[1,1,1];...
-                strcat(comptName,'@Nlab#MG'),[1,1,1];...
-                strcat(comptName,'@DON#MG'),[1,1,1];...
-                strcat(comptName,'@DIN#MG'),[1,1,1]
-                };    
-
-        elseif test == 13
-            Synthetic_test = '13_batch_oxygenBODcycle';
-
-            extractElm_info = {...
-                strcat(comptName,'@BOD#MG'),[1,1,1];...
-                strcat(comptName,'@DEFICIT_OXYG#MG'),[1,1,1];...
-                strcat(comptName,'@DO#MG'),[1,1,1]
-                };
-        end
-
-
-        %% ================================================================================================
-        % DON'T CHANGE BELOW ==============================================================================
-        % ================================================================================================
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % EXTARCT DATA
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        if extrData_flag == true
-
-
-            openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
-            addpath(openwq_readfuncs_dir)
-
-            folderpath = strcat(results_dir, '/', Synthetic_test,'/', model_name,'/Output_OpenWQ/');
-
-            output_openwq_tscollect_all = read_OpenWQ_outputs(...
-                openwq_readfuncs_dir,...        % Fullpath for needed functions
-                folderpath,...                  % Provide fullpath to directory where the HDF5 files are located
-                extractElm_info,...             % If the flag above is 1, then provide details about the variables to plot
-                'HDF5',...                      % Output format 
-                debugMode_flag);                % Debug mode
-
-            % Save Results
-            save(strcat(outputFolder,'/',model_name, '/', Synthetic_test,'.mat'), 'output_openwq_tscollect_all');
-
-        end
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % Plot elements
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        % TimeX_ConcY_perElement
-        if plot_TimeX_ConcY_perElement_flag == true
-
-            plot_OpenWQ_outputs_TimeX_ConcY_perElement(...
-                output_openwq_tscollect_all,...
-                openwq_noWaterConc_Val);  % No water concentration flag in openwq
-
-        end
-        
-        % ConcX_ZProfileY_perTime
-        if plot_ConcX_ZProfileY_perTime_flag == true
-                 
-             plot_OpenWQ_outputs_ConcX_ZProfileY_perTime(...
-                output_openwq_tscollect_all,...
-                requestProfileAPI,...     % profile request, e.g., "z(x=1,y=1)"
-                openwq_noWaterConc_Val);  % No water concentration flag in openwq
-            
-        end
-        
+        extractElm_info = {...
+            strcat(comptName,'@BOD#MG'),[1,1,1];...
+            strcat(comptName,'@DEFICIT_OXYG#MG'),[1,1,1];...
+            strcat(comptName,'@DO#MG'),[1,1,1]
+            };
     end
+
+
+    %% ================================================================================================
+    % DON'T CHANGE BELOW ==============================================================================
+    % ================================================================================================
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % EXTARCT DATA
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    if extrData_flag == true
+
+
+        openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
+        addpath(openwq_readfuncs_dir)
+
+        folderpath = strcat(results_dir, '/', Synthetic_test,'/', model_name,'/Output_OpenWQ/');
+
+        output_openwq_tscollect_all = read_OpenWQ_outputs(...
+            openwq_readfuncs_dir,...        % Fullpath for needed functions
+            folderpath,...                  % Provide fullpath to directory where the HDF5 files are located
+            extractElm_info,...             % If the flag above is 1, then provide details about the variables to plot
+            'HDF5',...                      % Output format 
+            debugMode_flag);                % Debug mode
+
+        % Save Results
+        save(strcat(outputFolder,'/',model_name, '/', Synthetic_test,'.mat'), 'output_openwq_tscollect_all');
+
+    end
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Plot elements
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % TimeX_ConcY_perElement
+    if plot_TimeX_ConcY_perElement_flag == true
+
+        plot_OpenWQ_outputs_TimeX_ConcY_perElement(...
+            output_openwq_tscollect_all,...
+            openwq_noWaterConc_Val);  % No water concentration flag in openwq
+
+    end
+
+    % ConcX_ZProfileY_perTime
+    if plot_ConcX_ZProfileY_perTime_flag == true
+
+         plot_OpenWQ_outputs_ConcX_ZProfileY_perTime(...
+            output_openwq_tscollect_all,...
+            requestProfileAPI,...     % profile request, e.g., "z(x=1,y=1)"
+            openwq_noWaterConc_Val);  % No water concentration flag in openwq
+
+    end
+        
 end

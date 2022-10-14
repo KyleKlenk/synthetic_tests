@@ -13,7 +13,7 @@ function AnltSOL_TRANSIENT_paperWRR
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
  
-test = 2; 
+test = 6; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General mdoel setup %%%%%%%%%%%%%%%%%%%%%
@@ -381,17 +381,25 @@ n = 1; % not needed because it's accounted for in the intersticil flow velocity
 
 % Mass injection unit of aquifer thickness (and area because it's 1D)
 % M (g/m3), Vol = m3/s, M_unitVol = 
-UpLayVol_m3 = UpLayVol_mm_m2 * 1000;
+UpLayVol_m3 = UpLayVol_mm_m2 / 1000;
 M_unitVol = M / UpLayVol_m3(1);
 M_unitVol = M * (iLayerLiqFluxSoil_summa_mm_s);
 
 M_unitVol = M / ((mLayerDepth_summa_mm / 1000) * mLayerVolFracLiq(1) * hru_area_m2);
 M_unitVol = M_unitVol * ( 4 * n * pi() * Dy );
 
-M_unitVol = 1.8/1000 * ( 4 * n * pi() * Dy ) / 1.75;
+M_unitVol = 1.8/1000 * ( 4 * n * pi() * Dy ) / 1.75; %=1.2925e-06%
 
 %M_nunitVol = 350 / (0.006 * 0.2 * 32700);
+M_unitVol = (2 * iLayerLiqFluxSoil_summa_mm_s) ;
+%MunitVol = (2 * iLayerLiqFluxSoil_summa_mm_s) / UpLayVol_m3(1);
+M_unitVol = (0.006 * iLayerLiqFluxSoil_summa_mm_s / 6);
 
+Cinit = (2 * iLayerLiqFluxSoil_summa_mm_s * 900 * hru_area_m2/1000) ...
+        / (iLayerLiqFluxSoil_summa_mm_s * 900 * hru_area_m2/1000 + UpLayVol_m3(1)/6);
+M_unitVol = Cinit * V;
+M_unitVol = M_unitVol / 3.2%* 1.8e6 
+%M_unitVol = 1.2925e-06;
 
 Cfinal=zeros(1,ny);
 
@@ -404,7 +412,7 @@ for y=1:ny
     % calculation of A
 
     A = (M_unitVol) /...
-        ( 4 * n * pi() * Dy );
+        ( 4 * n * pi() * Dy);
 
     % calculation of B
     B = exp(...
