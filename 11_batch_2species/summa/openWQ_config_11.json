@@ -5,9 +5,15 @@
         "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_11"],
             "INITIAL_CONDITIONS":{
-                "species_A": [10,"mg"],
-                "species_B": [0,"mg"],
-                "species_C": [0,"mg"]
+                "species_A": {
+                    "1": ["all","all","all",10,"mg/l"]
+                },
+                "species_B": {
+                    "1": ["all","all","all",0,"mg/l"]
+                },
+                "species_C": {
+                    "1": ["all","all","all",0,"mg/l"]
+                }
             }
         }
 

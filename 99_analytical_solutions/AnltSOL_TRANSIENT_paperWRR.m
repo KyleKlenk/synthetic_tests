@@ -13,7 +13,7 @@ function AnltSOL_TRANSIENT_paperWRR
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
  
-test = 6; 
+test = 8; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General mdoel setup %%%%%%%%%%%%%%%%%%%%%
