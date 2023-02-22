@@ -1,0 +1,27 @@
+{
+    "MODULE_NAME": "OPENWQ_NATIVE_BGC",
+    "CHEMICAL_SPECIES": {
+        "LIST": {
+            "1": "species_A",
+            "2": "species_B"
+        },
+        "BGC_GENERAL_MOBILE_SPECIES": [1, 2]
+    },
+    "CYCLING_FRAMEWORKS": {
+        "BGQcycle_1": {
+            "LIST_TRANSFORMATIONS":{
+                "1": "1st_order_decay_A2B"
+            },
+            "1":{
+                "CONSUMED": "species_A",
+                "PRODUCED": "species_B",
+                "KINETICS": ["species_A * k","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.01
+                    //"k": 0.00
+                }
+            }
+        }
+    }
+}

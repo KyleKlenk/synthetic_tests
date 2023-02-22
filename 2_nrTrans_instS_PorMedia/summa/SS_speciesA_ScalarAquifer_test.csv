@@ -1,0 +1,8 @@
+SS_speciesB_ScalarAquifer_test,,,,,,,,,,,
+This is a test file for debugging purposes,,,,,,,,,,,
+YYYY,MM,DD,HH,MIN,SEC,ix,iy,iz,load,load_type,time_units 
+all,all,all,all,all,all,all,all,all,0.0001,discrete,-
+all,all,all,all,all,all,all,all,all,0.0001,continuous,min
+2018,all,4,5,30,1,1,1,1,100,discrete,-
+2019,all,4,5,30,all,1,1,1,10,continuous,min
+2019,2,4,6,30,15,1,1,1,350,discrete,-
