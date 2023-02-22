@@ -36,8 +36,8 @@
 	"OPENWQ_OUTPUT": {
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
         "FORMAT": "HDF5", // HDF5, CSV
-        "CHEMICAL_SPECIES":["Nref","Nlab","DIN","DON","N2","PLANTS","time_track"],
-		"UNITS":"mg/l",
+        "CHEMICAL_SPECIES":["Nref","Nlab","DIN","DON","N2","PLANTS"],
+		"UNITS":"mg",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
 			"RIVER_NETWORK_REACHES": {

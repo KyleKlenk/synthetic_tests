@@ -4,24 +4,21 @@
         "LIST": {
             "1": "species_A",
             "2": "species_B",
-            "3": "species_C",
-            "4": "time_track",
-            "5": "dummy_var"
+            "3": "species_C"
         },
-        "BGC_general_mobile_species": [1, 2, 3]
+        "BGC_general_mobile_species": []
     },
     "CYCLING_FRAMEWORKS": {
         "bgq_test_9": {
             "LIST_TRANSFORMATIONS":{
                 "1": "1st_order_decay_A2B",
-                "2": "1st_order_decay_B2C",
-                "3": "mizuroute_warmup_time"
+                "2": "1st_order_decay_B2C"
             },
             "1":{
                 "CONSUMED": "species_A",
                 "PRODUCED": "species_B",
                 //"KINETICS": ["species_A * k","1/day"],
-                "KINETICS": ["if (time_track >= 50, species_A * k, 0)","1/day"],
+                "KINETICS": ["species_A * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.03
@@ -31,20 +28,10 @@
                 "CONSUMED": "species_B",
                 "PRODUCED": "species_C",
                 //"KINETICS": ["species_B * k","1/day"],
-                "KINETICS": ["if (time_track >= 50, species_B * k, 0)","1/day"],
+                "KINETICS": ["species_B * k","1/day"],
                 "PARAMETER_NAMES": ["k"],
                 "PARAMETER_VALUES":{
                     "k": 0.01
-                }
-            },
-            "3":{
-                "CONSUMED": "dummy_var",
-                "PRODUCED": "time_track",
-                "KINETICS": ["if (time_track < 50, 1, 0)","1/day"],
-                "PARAMETER_NAMES": ["k"],
-                "PARAMETER_VALUES":{
-                    //"k": 0.01
-                    "k": 0.0
                 }
             }
         }

@@ -9,12 +9,9 @@ clear all
 model_all = {'crhm',...
             'summa',...
             'mizuroute'};
-
-mizuroute_warmup_days = 50;
-mizuroute_warmup_days_buff = 1;
         
 tests_all = [9, 10, 11, 11.1, 12, 13];
-tests_all = 13;
+tests_all = 10;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start Processing
@@ -43,13 +40,6 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
 
             conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
-            
-            % Remove warmup perid for mizuroute
-            if (model_name == "mizuroute")
-                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
-            end
             
             % Analytical
             tsim = numel(conc_A_openwq.Time);
@@ -98,16 +88,6 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file_fullpath);
             
-            % Remove warmup perid for mizuroute
-            if (model_name == "mizuroute")
-                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_B_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_B_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_B_openwq = timetable(data_save_final,'RowTimes',Time);
-            end
 
             % Analytical
             tsim = numel(conc_A_openwq.Time);
@@ -139,21 +119,6 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file_fullpath);
 
-            
-            % Remove warmup perid for mizuroute
-            if (model_name == "mizuroute")
-                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_B_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_B_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_B_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_C_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_C_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_C_openwq = timetable(data_save_final,'RowTimes',Time);
-            end
             
              % Analytical
             tsim = numel(conc_A_openwq.Time);
@@ -195,24 +160,6 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file_fullpath);
             
-             % Remove warmup perid for mizuroute
-            if (model_name == "mizuroute")
-                Time = conc_Nref_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_Nref_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_Nref_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_Nlab_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_Nlab_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_Nlab_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_DON_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_DON_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_DON_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = conc_DIN_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = conc_DIN_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                conc_DIN_openwq = timetable(data_save_final,'RowTimes',Time);
-            end
             
             % Analytical
             tsim = numel(conc_Nref_openwq.Time);
@@ -268,17 +215,7 @@ for model_i = 1:numel(model_all)
             openWQres_file = '13_batch_oxygenBODcycle.mat';
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file_fullpath);
-            
-             % Remove warmup perid for mizuroute
-            if (model_name == "mizuroute")
-                Time = c_bod_openwq.Time(mizuroute_warmup_days+1:end);
-                data_save_final = c_bod_openwq.data_save_final(mizuroute_warmup_days+1:end);
-                c_bod_openwq = timetable(data_save_final,'RowTimes',Time);
-                
-                Time = c_do_openwq_deficit.Time(mizuroute_warmup_days+1:end);
-                data_save_final = c_do_openwq_deficit.data_save_final(mizuroute_warmup_days+1:end);
-                c_do_openwq_deficit = timetable(data_save_final,'RowTimes',Time);
-            end
+           
 
             % Analytical
             tsim = numel(c_bod_openwq.Time);

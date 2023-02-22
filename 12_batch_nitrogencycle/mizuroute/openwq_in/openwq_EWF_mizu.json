@@ -21,7 +21,7 @@
 		"Chemical_name": "Nref",
 		"Data": {
 			// YYYY,MM,DD,HH,MIN,SEC, ix,iy,iz,load
-			"1": ["all","all","all","all","all","all","all","all","all",0.08897487070765] 
+			"1": ["all","all","all","all","all","all","all","all","all",0.0] 
 			//"2": [2018,"all",4,6,30,"all",1,1,10,"discrete"],
 			//"3": [2017,11,20,6,30,"all",1,1,10,"discrete"],
 			//"4": [2018,"all","all",10,30,"all",1,1,20,"discrete"],

@@ -15,7 +15,8 @@ model_all = {...'crhm',...
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
-test = 13;
+% test = 14; % test_debug
+test = 10;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -94,10 +95,8 @@ for model_i = 1:numel(model_all)
     
     if model_name == "crhm" || model_name == "summa" 
         ix_request = 1;
-        units_request = 'MG';
     elseif model_name == "mizuroute" 
         ix_request = 6430;
-        units_request = 'MG|L';
     end
     
     if test == 2
@@ -143,51 +142,59 @@ for model_i = 1:numel(model_all)
         Synthetic_test = '9_batch_singleSp_1storder';
 
         extractElm_info = {...
-            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@TIME_TRACK#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
+            strcat(comptName,'@TIME_TRACK#MG'),[ix_request,1,1]
             };
 
     elseif test == 10
         Synthetic_test = '10_batch_singleSp_2ndorder';
 
         extractElm_info = {...
-            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
             };
 
     elseif test == 11
         Synthetic_test = '11_batch_2species';
 
         extractElm_info = {...
-            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@SPECIES_B#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_B#MG'),[ix_request,1,1]
             };
 
     elseif test == 11.1
         Synthetic_test = '11_1_batch_3species';
 
         extractElm_info = {...
-            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@SPECIES_B#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@SPECIES_C#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_B#MG'),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_C#MG'),[ix_request,1,1]
             };
 
     elseif test == 12
         Synthetic_test = '12_batch_nitrogencycle';
 
         extractElm_info = {...
-            strcat(comptName,['@NREF#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@NLAB#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@DON#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@DIN#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@NREF#MG'),[ix_request,1,1]
+            strcat(comptName,'@NLAB#MG'),[ix_request,1,1]
+            strcat(comptName,'@DON#MG'),[ix_request,1,1]
+            strcat(comptName,'@DIN#MG'),[ix_request,1,1]
             };    
 
     elseif test == 13
         Synthetic_test = '13_batch_oxygenBODcycle';
 
         extractElm_info = {...
-            strcat(comptName,['@BOD#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@DEFICIT_OXYG#', units_request]),[ix_request,1,1]
-            strcat(comptName,['@DO#', units_request]),[ix_request,1,1]
+            strcat(comptName,'@BOD#MG'),[ix_request,1,1]
+            strcat(comptName,'@DEFICIT_OXYG#MG'),[ix_request,1,1]
+            strcat(comptName,'@DO#MG'),[ix_request,1,1]
+            };
+        
+    elseif test == 14
+        Synthetic_test = 'test_debug';
+
+        extractElm_info = {...
+            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
+            strcat(comptName,'@TIME_TRACK#MG'),[ix_request,1,1]
             };
     end
 

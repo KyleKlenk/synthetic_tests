@@ -8,19 +8,13 @@
                 "Data_Format": "JSON",
                 "Data":{
                     "species_A": {
-                        "1": ["all","all","all",10,"mg/l"]
+                        "1": ["all","all","all",10,"mg"]
                     },
                     "species_B": {
-                        "1": ["all","all","all",0,"mg/l"]
+                        "1": ["all","all","all",0,"mg"]
                     },
                     "species_C": {
-                        "1": ["all","all","all",0,"mg/l"]
-                    },
-                    "time_track": {
-                        "1": ["all","all","all",0,"g"]
-                    },
-                    "dummy_var": {
-                        "1": ["all","all","all",10000,"g"]
+                        "1": ["all","all","all",0,"mg"]
                     }
                 }
                 //"Data_Format": "HDF5",
