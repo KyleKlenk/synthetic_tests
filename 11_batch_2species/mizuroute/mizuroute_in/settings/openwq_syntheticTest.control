@@ -1,0 +1,66 @@
+! ****************************************************************************************************************************
+! ***** DEFINITION OF MODEL CONTROL INFORMATION ******************************************************************************
+! ****************************************************************************************************************************
+! ****************************************************************************************************************************
+! Note: lines starting with "!" are treated as comment lines -- there is no limit on the number of comment lines.
+!    lines starting with <xxx> are read till "!" 
+!
+! ****************************************************************************************************************************
+! DEFINE DIRECTORIES 
+! --------------------------
+<ancil_dir>         ./mizuroute_in/ancillary_data/                         ! directory containing ancillary data (river network, remapping netCDF) 
+<input_dir>         ./mizuroute_in/input/                                  ! directory containing input data (runoff netCDF) 
+<output_dir>        ./mizuroute_out/                                 ! directory containing output data
+! ****************************************************************************************************************************
+! DEFINE TIME PERIOD OF THE SIMULATION
+! --------------------------------------------
+<case_name>         v1.2_case1                                ! simulation case name
+<sim_start>         2017-07-03 12:15:00                       ! time of simulation start (yyyy-mm-dd hh:mm:ss)
+<sim_end>           2019-12-20 13:45:00                       ! time of simulation end (yyyy-mm-dd hh:mm:ss)
+<newFileFrequency>  single                                    ! Diogo
+<route_opt>         5                                         ! option for routing schemes 1->IRF, 2->KWT otherwise error, 3->kinematicWave, 4->muskingumCunge, 5-diffusiveWave
+<restart_write>     last                                      ! restart write option. never, last, specified (need to specify date with <restart_date> 
+!<fname_state_in>   v1.2_case2.mizuRoute.r.yyy-mm-hh.sssss.nc ! input netCDF for channel states 
+! ****************************************************************************************************************************
+! DEFINE RIVER NETWORK FILE 
+! ---------------------------------------
+<fname_ntopOld>     ntopo_nhdplus_cameo_pfaf.nc               ! name of netCDF containing river segment data 
+<dname_sseg>        seg                                       ! dimension name of the stream segments
+<dname_nhru>        hru                                       ! dimension name of the RN_HRUs 
+! ****************************************************************************************************************************
+! DEFINE DESIRED VARIABLES FOR THE NETWORK TOPOLOGY
+! ---------------------------------------------------------
+<seg_outlet>        -9999                                     ! reach ID of outlet streamflow segment. -9999 for all segments 
+! ****************************************************************************************************************************
+! DEFINE RUNOFF FILE
+! ----------------------------------
+<fname_qsim>        RUNOFF_syntheticTest_new.nc                           ! name of netCDF containing the HRU runoff
+<vname_qsim>        RUNOFF                                    ! variable name of HRU runoff 
+<vname_time>        time                                      ! variable name of time in the runoff file 
+<vname_hruid>       hru                                       ! variable name of runoff HRU ID 
+<dname_time>        time                                      ! dimension name of time 
+<dname_hruid>       hru                                       ! dimension name of HM_HRU 
+<units_qsim>        mm/s                                      ! units of runoff
+<dt_qsim>           86400                                     ! time interval of the runoff
+! ****************************************************************************************************************************
+! DEFINE RUNOFF MAPPING FILE 
+! ----------------------------------
+<is_remap>          F                                         ! logical to indicate runnoff needs to be mapped to river network HRU 
+! ****************************************************************************************************************************
+! Namelist file name 
+! ---------------------------
+<param_nml>         param.nml.default                         ! spatially constant model parameters 
+! ****************************************************************************************************************************
+! Dictionary to map variable names
+! ---------------------------
+<varname_area>      HRU_AREA                                  ! name of variable holding hru area
+<varname_length>    Length                                    ! name of variable holding segment length
+<varname_slope>     So                                        ! name of variable holding segment slope
+<varname_HRUid>     idFeature                                 ! name of variable holding HRU id
+<varname_hruSegId>  hru2seg                                   ! name of variable holding the stream segment below each HRU  
+<varname_segId>     link                                      ! name of variable holding the ID of each stream segment  
+<varname_downSegId> to                                        ! name of variable holding the ID of the next downstream segment
+<varname_pfafCode>  pCode                                     ! name of variable holding the pfafstetter code 
+! ****************************************************************************************************************************
+! ****************************************************************************************************************************
+! ****************************************************************************************************************************

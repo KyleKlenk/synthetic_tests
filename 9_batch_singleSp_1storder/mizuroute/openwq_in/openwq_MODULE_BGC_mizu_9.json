@@ -1,0 +1,41 @@
+{
+    "MODULE_NAME": "OPENWQ_NATIVE_BGC",
+    "CHEMICAL_SPECIES": {
+        "LIST": {
+            "1": "species_A",
+            "2": "species_B",
+            "3": "time_track",
+            "4": "dummy_var"
+        },
+        "BGC_general_mobile_species": [1, 2]
+    },
+    "CYCLING_FRAMEWORKS": {
+        "bgq_test_9": {
+            "LIST_TRANSFORMATIONS":{
+                "1": "1st_order_decay_A2B",
+                "2": "mizuroute_warmup_time"
+            },
+            "1":{
+                "CONSUMED": "species_A",
+                "PRODUCED": "species_B",
+                //"KINETICS": ["species_A * k","1/day"],
+                "KINETICS": ["if (time_track >= 50, species_A * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    //"k": 0.01
+                    "k": 0.01
+                }
+            },
+            "2":{
+                "CONSUMED": "dummy_var",
+                "PRODUCED": "time_track",
+                "KINETICS": ["if (time_track < 50, 1, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    //"k": 0.01
+                    "k": 0.0
+                }
+            }
+        }
+    }
+}

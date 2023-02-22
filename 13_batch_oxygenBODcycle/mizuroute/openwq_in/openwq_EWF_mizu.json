@@ -1,0 +1,31 @@
+{
+	"METADATA": {
+		"Comment": "External_model",
+		"Source": "test_1"
+	},
+	/*
+	"1": {
+		"DATA_FORMAT": "HDF5",
+		"UNITS": "mg/l",
+		"EXTERNAL_COMPARTMENT_NAME": "ATMOSPHERE_LAYER",
+		"EXTERNAL_INPUTFLUX_NAME": "SUMMA_RUNOFF",
+		"INTERACTION_INTERFACE": ["all",1, 1],
+		"INTERPOLATION": "linear", // linear, nearest, cubic
+		"FOLDERPATH": "openwq_ewf_h5"
+	}
+	*/
+	"1": {
+		"Data_Format": "JSON", // JSON
+		"Units": "mg/l",
+		"External_InputFlux_name": "SUMMA_RUNOFF",
+		"Chemical_name": "BOD",
+		"Data": {
+			// YYYY,MM,DD,HH,MIN,SEC, ix,iy,iz,load
+			"1": ["all","all","all","all","all","all","all","all","all",0.08897487070765] 
+			//"2": [2018,"all",4,6,30,"all",1,1,10,"discrete"],
+			//"3": [2017,11,20,6,30,"all",1,1,10,"discrete"],
+			//"4": [2018,"all","all",10,30,"all",1,1,20,"discrete"],
+			//"5": [2018,9,27,4,30,1,1,1,20000,"discrete"]
+		}
+	}
+}

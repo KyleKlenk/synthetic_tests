@@ -7,10 +7,14 @@ clear all
 
 % Configuration
 model_all = {'crhm',...
-            'summa'};
+            'summa',...
+            'mizuroute'};
 
+mizuroute_warmup_days = 50;
+mizuroute_warmup_days_buff = 1;
+        
 tests_all = [9, 10, 11, 11.1, 12, 13];
-
+tests_all = 13;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start Processing
@@ -39,7 +43,14 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
 
             conc_A_openwq = getOpenWQResults_1species(openWQres_file_fullpath);
-
+            
+            % Remove warmup perid for mizuroute
+            if (model_name == "mizuroute")
+                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
+            end
+            
             % Analytical
             tsim = numel(conc_A_openwq.Time);
             conc_A_analytical = test_1_singleSpecies_1order(c0, k, tsim);
@@ -47,7 +58,8 @@ for model_i = 1:numel(model_all)
             title_str = "Batch Reactor: Single species with 1^{st} order decay";
             plotAnalytical_singleSpec(conc_A_analytical,...
                                       conc_A_openwq,...
-                                      title_str)
+                                      title_str,...
+                                      model_name)
 
         %%%%%%%%%%%%%%%%%%%%%%%
         % Test 10
@@ -69,7 +81,8 @@ for model_i = 1:numel(model_all)
             title_str = "Batch Reactor: Single species with 2^{nd} order decay";
             plotAnalytical_singleSpec(conc_A_analytical,...
                                       conc_A_openwq,...
-                                      title_str)
+                                      title_str,...
+                                      model_name)
 
         %%%%%%%%%%%%%%%%%%%%%%%
         % Test 11
@@ -84,6 +97,17 @@ for model_i = 1:numel(model_all)
             openWQres_file = '11_batch_2species.mat';
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_A_openwq, conc_B_openwq] = getOpenWQResults_2species(openWQres_file_fullpath);
+            
+            % Remove warmup perid for mizuroute
+            if (model_name == "mizuroute")
+                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_B_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_B_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_B_openwq = timetable(data_save_final,'RowTimes',Time);
+            end
 
             % Analytical
             tsim = numel(conc_A_openwq.Time);
@@ -96,7 +120,8 @@ for model_i = 1:numel(model_all)
                                     conc_B_openwq,...
                                     title_str,...
                                     "Species\_A",...
-                                    "Species\_B")
+                                    "Species\_B",...
+                                    model_name)
 
         %%%%%%%%%%%%%%%%%%%%%%%
         % Test 11.1
@@ -114,10 +139,26 @@ for model_i = 1:numel(model_all)
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_A_openwq, conc_B_openwq, conc_C_openwq] = getOpenWQResults_3species(openWQres_file_fullpath);
 
-            % Analytical
+            
+            % Remove warmup perid for mizuroute
+            if (model_name == "mizuroute")
+                Time = conc_A_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_A_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_A_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_B_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_B_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_B_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_C_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_C_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_C_openwq = timetable(data_save_final,'RowTimes',Time);
+            end
+            
+             % Analytical
             tsim = numel(conc_A_openwq.Time);
             [conc_A_analytical, conc_B_analytical, conc_C_analytical] = test_3_threeSpecies(c0_a, c0_b, c0_c, k_a, k_b, k_c, tsim);
-
+            
             title_str = "Batch Reactor: Chain reaction with 3 Species with 1^{st} order decay";
             plotAnalytical_3species(conc_A_analytical,...
                                     conc_B_analytical,...
@@ -128,7 +169,8 @@ for model_i = 1:numel(model_all)
                                     title_str,...
                                     "Species\_A",...
                                     "Species\_B",...
-                                    "Species\_C")
+                                    "Species\_C",...
+                                    model_name)
 
 
         %%%%%%%%%%%%%%%%%%%%%%%
@@ -152,7 +194,26 @@ for model_i = 1:numel(model_all)
             openWQres_file = '12_batch_nitrogencycle.mat';
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [conc_Nref_openwq, conc_Nlab_openwq, conc_DON_openwq, conc_DIN_openwq] = getOpenWQResults_Ncyclespecies(openWQres_file_fullpath);
-
+            
+             % Remove warmup perid for mizuroute
+            if (model_name == "mizuroute")
+                Time = conc_Nref_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_Nref_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_Nref_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_Nlab_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_Nlab_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_Nlab_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_DON_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_DON_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_DON_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = conc_DIN_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = conc_DIN_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                conc_DIN_openwq = timetable(data_save_final,'RowTimes',Time);
+            end
+            
             % Analytical
             tsim = numel(conc_Nref_openwq.Time);
             [conc_Nref_analytical, conc_Nlab_analytical, conc_DON_analytical, conc_DIN_analytical] = test_4_nitrogen(c0_Nref,...
@@ -182,7 +243,8 @@ for model_i = 1:numel(model_all)
                                     "Nref",...
                                     "Nlab",...
                                     "DON",...
-                                    "DIN")
+                                    "DIN",...
+                                    model_name)
 
         %%%%%%%%%%%%%%%%%%%%%%%
         % Test 13
@@ -206,6 +268,17 @@ for model_i = 1:numel(model_all)
             openWQres_file = '13_batch_oxygenBODcycle.mat';
             openWQres_file_fullpath = strcat(outputFolder,openWQres_file);
             [c_bod_openwq, c_do_openwq_deficit] = getOpenWQResults_2species(openWQres_file_fullpath);
+            
+             % Remove warmup perid for mizuroute
+            if (model_name == "mizuroute")
+                Time = c_bod_openwq.Time(mizuroute_warmup_days+1:end);
+                data_save_final = c_bod_openwq.data_save_final(mizuroute_warmup_days+1:end);
+                c_bod_openwq = timetable(data_save_final,'RowTimes',Time);
+                
+                Time = c_do_openwq_deficit.Time(mizuroute_warmup_days+1:end);
+                data_save_final = c_do_openwq_deficit.data_save_final(mizuroute_warmup_days+1:end);
+                c_do_openwq_deficit = timetable(data_save_final,'RowTimes',Time);
+            end
 
             % Analytical
             tsim = numel(c_bod_openwq.Time);
@@ -229,7 +302,8 @@ for model_i = 1:numel(model_all)
                                     c_do_openwq,...
                                     title_str,...
                                     "BOD",...
-                                    "DO")
+                                    "DO",...
+                                    model_name)
 
         end
     end
@@ -567,7 +641,8 @@ end
 % Plot results (1 species)
 function plotAnalytical_singleSpec(conc_A_analytical,...
                                    conc_A_openwq,...
-                                   title_str)
+                                   title_str,...
+                                   model_name)
    
    time = conc_A_openwq.Time;
    figure
@@ -579,7 +654,7 @@ function plotAnalytical_singleSpec(conc_A_analytical,...
     ylabel("Concentration (mg/l)")
     
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
         
     title(title_str)
    
@@ -609,8 +684,8 @@ function plotAnalytical_2species(conc_A_analytical,...
                                  conc_B_openwq,...
                                  title_str,...
                                  spec_name_A,...
-                                 spec_name_B...
-                                 )
+                                 spec_name_B,...
+                                 model_name)
     
     time = conc_A_openwq.Time;
                              
@@ -625,7 +700,7 @@ function plotAnalytical_2species(conc_A_analytical,...
     xlabel("Time")
     ylabel("Concentration (mg/l)")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+           [model_name,'-openwq'])
     title(spec_name_A)
     grid on
 
@@ -638,7 +713,7 @@ function plotAnalytical_2species(conc_A_analytical,...
     ylabel("Concentration (mg/l)")
 
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
 
     title(spec_name_B)
     grid on
@@ -654,7 +729,8 @@ function plotAnalytical_3species(conc_A_analytical,...
                                  title_str,...
                                  spec_name_A,...
                                  spec_name_B,...
-                                 spec_name_C)
+                                 spec_name_C,...
+                                 model_name)
     
    time = conc_A_openwq.Time;
    
@@ -669,7 +745,7 @@ function plotAnalytical_3species(conc_A_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(spec_name_A)
     grid on
 
@@ -681,7 +757,7 @@ function plotAnalytical_3species(conc_A_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+           [model_name,'-openwq'])
     title(spec_name_B)
     grid on
         
@@ -693,7 +769,7 @@ function plotAnalytical_3species(conc_A_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(spec_name_C)
     grid on
     
@@ -712,7 +788,8 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
                             Nref_name,...
                             Nlab_name,...
                             DON_name,...
-                            DIN_name)
+                            DIN_name,...
+                            model_name)
      
                         
     time = conc_Nref_openwq.Time;
@@ -728,7 +805,7 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(Nref_name)
     grid on
     
@@ -740,7 +817,7 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(Nlab_name)
     grid on
     
@@ -752,7 +829,7 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(DON_name)
     grid on
     
@@ -764,7 +841,7 @@ function plotAnalytical_NcycleRes(conc_Nref_analytical,...
     xlabel("Time")
     ylabel("Concentration")
     legend([ax2, ax1],"Analytical",...
-            "OpenWQ")
+            [model_name,'-openwq'])
     title(DIN_name)
     grid on
     

@@ -15,7 +15,7 @@ model_all = {...'crhm',...
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
-test = 9;
+test = 13;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -144,49 +144,50 @@ for model_i = 1:numel(model_all)
 
         extractElm_info = {...
             strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@TIME_TRACK#', units_request]),[ix_request,1,1]
             };
 
     elseif test == 10
         Synthetic_test = '10_batch_singleSp_2ndorder';
 
         extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#G'),[1,1,1]
+            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
             };
 
     elseif test == 11
         Synthetic_test = '11_batch_2species';
 
         extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
-            strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
+            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@SPECIES_B#', units_request]),[ix_request,1,1]
             };
 
     elseif test == 11.1
         Synthetic_test = '11_1_batch_3species';
 
         extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#MG'),[1,1,1];...
-            strcat(comptName,'@SPECIES_B#MG'),[1,1,1];...
-            strcat(comptName,'@SPECIES_C#MG'),[1,1,1];...
+            strcat(comptName,['@SPECIES_A#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@SPECIES_B#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@SPECIES_C#', units_request]),[ix_request,1,1]
             };
 
     elseif test == 12
         Synthetic_test = '12_batch_nitrogencycle';
 
         extractElm_info = {...
-            strcat(comptName,'@Nref#MG'),[1,1,1];...
-            strcat(comptName,'@Nlab#MG'),[1,1,1];...
-            strcat(comptName,'@DON#MG'),[1,1,1];...
-            strcat(comptName,'@DIN#MG'),[1,1,1]
+            strcat(comptName,['@NREF#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@NLAB#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@DON#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@DIN#', units_request]),[ix_request,1,1]
             };    
 
     elseif test == 13
         Synthetic_test = '13_batch_oxygenBODcycle';
 
         extractElm_info = {...
-            strcat(comptName,'@BOD#MG'),[1,1,1];...
-            strcat(comptName,'@DEFICIT_OXYG#MG'),[1,1,1];...
-            strcat(comptName,'@DO#MG'),[1,1,1]
+            strcat(comptName,['@BOD#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@DEFICIT_OXYG#', units_request]),[ix_request,1,1]
+            strcat(comptName,['@DO#', units_request]),[ix_request,1,1]
             };
     end
 
@@ -200,8 +201,11 @@ for model_i = 1:numel(model_all)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if extrData_flag == true
 
-
-        openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
+        if (model_name == "crhm" || model_name == "summa")
+            openwq_readfuncs_dir = '../../build/source/openwq/openwq/supporting_scripts/Read_Outputs/';
+        elseif (model_name == "mizuroute")
+            openwq_readfuncs_dir = '../../mizuroute/route/build/openwq/openwq/supporting_scripts/Read_Outputs/';
+        end
         addpath(openwq_readfuncs_dir)
 
         folderpath = strcat(results_dir, '/', Synthetic_test,'/', model_name,'/Output_OpenWQ/');

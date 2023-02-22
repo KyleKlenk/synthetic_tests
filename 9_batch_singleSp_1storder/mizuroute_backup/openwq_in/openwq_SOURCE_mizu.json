@@ -1,0 +1,16 @@
+{
+	"METADATA": {
+		"Comment": "synthetic loading",
+		"Source": "cameo_test"
+	},
+	"1": {
+		"Chemical_name": "species_A",
+		"Compartment_name": "RIVER_NETWORK_REACHES",
+		"Type": "source",
+		"Units": "mg/l",
+		"Data_Format": "JSON", // JSON
+		"Data": { // YYYY,MM,DD,HH,ix,iy,iz,load
+			"1": [1949,4,26,6,0,0,200,1,1,0,"discrete"]
+		}
+	}
+}

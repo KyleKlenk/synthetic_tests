@@ -22,6 +22,12 @@
                 },
                 "PLANTS": {
                     "1": ["all","all","all",0,"mg/l"]
+                },
+                "time_track": {
+                    "1": ["all","all","all",0,"g"]
+                },
+                "dummy_var": {
+                    "1": ["all","all","all",10000,"g"]
                 }
             }
         }

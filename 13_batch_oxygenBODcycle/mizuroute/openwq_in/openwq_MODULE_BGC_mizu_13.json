@@ -1,0 +1,50 @@
+{
+    "MODULE_NAME": "OPENWQ_NATIVE_BGC",
+    "CHEMICAL_SPECIES": {
+        "LIST": {
+            "1": "BOD",
+            "2": "DO",
+            "3": "DEFICIT_OXYG",
+            "4": "time_track",
+            "5": "dummy_var"
+        },
+        "BGC_general_mobile_species": [1, 2, 3]
+    },
+    "CYCLING_FRAMEWORKS": {
+        "bgq_test_13": {
+            "LIST_TRANSFORMATIONS":{
+                "1": "BOD_decay",
+                "2": "Reaeration",
+                "3": "mizuroute_warmup_time"
+            },
+            "1":{
+                "CONSUMED": "BOD",
+                "PRODUCED": "DEFICIT_OXYG",
+                "KINETICS": ["if (time_track >= 50, BOD * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.1
+                }
+            },
+            "2":{
+                "CONSUMED": "DEFICIT_OXYG",
+                "PRODUCED": "DO",
+                "KINETICS": ["if (time_track >= 50, DEFICIT_OXYG * p, 0)","1/day"],
+                "PARAMETER_NAMES": ["p"],
+                "PARAMETER_VALUES":{
+                    "p": 0.5
+                }
+            },
+            "3":{
+                "CONSUMED": "dummy_var",
+                "PRODUCED": "time_track",
+                "KINETICS": ["if (time_track < 50, 1, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    //"k": 0.01
+                    "k": 0.0
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+Flowline_CO_14_cameo.shp is a subset from NHDPLUS CO region 14 shapefile based on pfafstetter code, but removing closed basin segments
+Note that number of reaches mismatch between ntopo_nhdplus_cameo_pfaf.nc (based on topology developed without pfafstetter code) and Flowline_CO_14_cameo.shp (based on pfafsterr code) 
+pfafstetter code is based on network topology however, segment with zero upstream drainage area are considerred as missing.
+
+The same for Catchment_CO_14_cameo.shp except closed basin catchments are included. 

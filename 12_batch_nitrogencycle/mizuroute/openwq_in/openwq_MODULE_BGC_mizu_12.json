@@ -1,0 +1,93 @@
+{
+    "MODULE_NAME": "OPENWQ_NATIVE_BGC",
+    "CHEMICAL_SPECIES": {
+        "LIST": {
+            "1": "Nref",
+            "2": "Nlab",
+            "3": "DIN",
+            "4": "DON",
+            "5": "N2",
+            "6": "PLANTS",
+            "7": "time_track",
+            "8": "dummy_var"
+        },
+        "BGC_general_mobile_species": [1,2, 3, 4, 5, 6]
+    },
+    "CYCLING_FRAMEWORKS": {
+        "bgq_test_12": {
+            "LIST_TRANSFORMATIONS":{
+                "1": "degrad",
+                "2": "dissol_1",
+                "3": "dissol_2",
+                "4": "miner",
+                "5": "denit",
+                "6": "plantup",
+                "7": "mizuroute_warmup_time"
+            },
+            "1":{
+                "CONSUMED": "Nref",
+                "PRODUCED": "Nlab",
+                "KINETICS": ["if (time_track >= 50, Nref * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.006
+                }
+            },
+            "2":{
+                "CONSUMED": "Nref",
+                "PRODUCED": "DON",
+                "KINETICS": ["if (time_track >= 50, Nref * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.0002
+                }
+            },
+            "3":{
+                "CONSUMED": "Nlab",
+                "PRODUCED": "DON",
+                "KINETICS": ["if (time_track >= 50, Nlab * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.0003
+                }
+            },
+            "4":{
+                "CONSUMED": "Nlab",
+                "PRODUCED": "DIN",
+                "KINETICS": ["if (time_track >= 50, Nlab * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.003
+                }
+            },
+            "5":{
+                "CONSUMED": "DIN",
+                "PRODUCED": "N2",
+                "KINETICS": ["if (time_track >= 50, DIN * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.001
+                }
+            },
+            "6":{
+                "CONSUMED": "DIN",
+                "PRODUCED": "PLANTS",
+                "KINETICS": ["if (time_track >= 50, DIN * k, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    "k": 0.001
+                }
+            },
+            "7":{
+                "CONSUMED": "dummy_var",
+                "PRODUCED": "time_track",
+                "KINETICS": ["if (time_track < 50, 1, 0)","1/day"],
+                "PARAMETER_NAMES": ["k"],
+                "PARAMETER_VALUES":{
+                    //"k": 0.01
+                    "k": 0.0
+                }
+            }
+        }
+    }
+}
