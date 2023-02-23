@@ -37,7 +37,7 @@
 		"RESULTS_FOLDERPATH": "Output_OpenWQ",
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["species_A","species_B"],
-		"UNITS":"mg",
+		"UNITS":"g",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
 			"RIVER_NETWORK_REACHES": {

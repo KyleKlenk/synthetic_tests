@@ -3,15 +3,15 @@
     "BIOGEOCHEMISTRY_CONFIGURATION":{
 
         "RIVER_NETWORK_REACHES":{
-            "CYCLING_FRAMEWORK": ["bgq_test_10"],
+            "CYCLING_FRAMEWORK": ["BGQcycle_10"],
             "INITIAL_CONDITIONS":{
                 "Data_Format": "JSON",
                 "Data":{
                     "species_A": {
-                        "1": ["all","all","all",10,"mg"]
+                        "1": ["all","all","all",10,"g"]
                     },
                     "species_B": {
-                        "1": ["all","all","all",0,"mg"]
+                        "1": ["all","all","all",0,"g"]
                     }
                 }
                 //"Data_Format": "HDF5",

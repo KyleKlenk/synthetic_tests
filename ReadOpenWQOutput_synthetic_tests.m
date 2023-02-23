@@ -80,6 +80,7 @@ for model_i = 1:numel(model_all)
         % crhm
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/bin/Case_Studies/synthetic_tests';  
         comptName = 'SOIL_RECHR';
+        test10_units = 'MG';
     elseif model_name == "summa"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/bin/synthetic_tests';
@@ -87,10 +88,12 @@ for model_i = 1:numel(model_all)
         %comptName = 'RUNOFF';
         comptName = 'ILAYERVOLFRACWAT_SOIL';
         %comptName = 'SCALARAQUIFER';
+        test10_units = 'MG';
      elseif model_name == "mizuroute"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/mizuRoute/case_studies/synthetic_tests';
         comptName = 'RIVER_NETWORK_REACHES';
+        test10_units = 'G';
     end
     
     if model_name == "crhm" || model_name == "summa" 
@@ -148,10 +151,10 @@ for model_i = 1:numel(model_all)
 
     elseif test == 10
         Synthetic_test = '10_batch_singleSp_2ndorder';
-
+        
         extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
-            strcat(comptName,'@SPECIES_B#MG'),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_A#', test10_units),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_B#', test10_units),[ix_request,1,1]
             };
 
     elseif test == 11
