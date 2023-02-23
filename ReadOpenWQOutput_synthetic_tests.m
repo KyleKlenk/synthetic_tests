@@ -151,6 +151,7 @@ for model_i = 1:numel(model_all)
 
         extractElm_info = {...
             strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
+            strcat(comptName,'@SPECIES_B#MG'),[ix_request,1,1]
             };
 
     elseif test == 11
