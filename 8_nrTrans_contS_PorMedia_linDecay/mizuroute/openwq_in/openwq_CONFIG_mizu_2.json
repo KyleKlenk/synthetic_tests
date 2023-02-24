@@ -1,0 +1,30 @@
+{
+    
+    "BIOGEOCHEMISTRY_CONFIGURATION":{
+
+        "RIVER_NETWORK_REACHES":{
+            "CYCLING_FRAMEWORK": ["bgq_test_9"],
+            "INITIAL_CONDITIONS":{
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",10,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "time_track": {
+                        "1": ["all","all","all",0,"g"]
+                    },
+                    "time_pool": {
+                        "1": ["all","all","all",200,"g"]
+                    }
+                }
+                //"Data_Format": "HDF5",
+                //"FOLDERPATH": "openwq_ic_h5",
+                //"TIMESTAMP": "1950Apr01-12:00:00",
+                //"UNITS": "mg"
+            }
+        }
+    } 
+}
