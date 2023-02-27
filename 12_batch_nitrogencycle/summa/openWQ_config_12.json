@@ -5,29 +5,26 @@
         "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_12"],
             "INITIAL_CONDITIONS":{
-                "Nref": {
-                    "1": ["all","all","all",10,"mg/l"]
-                },
-                "Nlab": {
-                    "1": ["all","all","all",10,"mg/l"]
-                },
-                "DIN": {
-                    "1": ["all","all","all",5,"mg/l"]
-                },
-                "DON": {
-                    "1": ["all","all","all",2,"mg/l"]
-                },
-                "N2": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "PLANTS": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "time_track": {
-                    "1": ["all","all","all",0,"g"]
-                },
-                "dummy_var": {
-                    "1": ["all","all","all",10000,"g"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "Nref": {
+                        "1": ["all","all","all",10,"mg"]
+                    },
+                    "Nlab": {
+                        "1": ["all","all","all",10,"mg"]
+                    },
+                    "DIN": {
+                        "1": ["all","all","all",5,"mg"]
+                    },
+                    "DON": {
+                        "1": ["all","all","all",2,"mg"]
+                    },
+                    "N2": {
+                        "1": ["all","all","all",0,"mg"]
+                    },
+                    "PLANTS": {
+                        "1": ["all","all","all",0,"mg"]
+                    }
                 }
             }
         }

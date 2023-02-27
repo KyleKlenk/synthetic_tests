@@ -4,55 +4,70 @@
         "SCALARCANOPYWAT":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "species_B": {
-                    "1": ["all","all","all",0,"mg/l"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    }
                 }
             }
         },
         "ILAYERVOLFRACWAT_SNOW":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "species_B": {
-                    "1": ["all","all","all",0,"mg/l"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    }
                 }
             }
         },
         "RUNOFF":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "species_B": {
-                    "1": ["all","all","all",0,"mg/l"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    }
                 }
             }
         },
         "ILAYERVOLFRACWAT_SOIL":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "species_B": {
-                    "1": ["all","all","all",0,"mg/l"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    }
                 }
             }
         },
         "SCALARAQUIFER":{
             "CYCLING_FRAMEWORK": ["BGQcycle_1"],
             "INITIAL_CONDITIONS":{
-                "species_A": {
-                    "1": ["all","all","all",0,"mg/l"]
-                },
-                "species_B": {
-                    "1": ["all","all","all",0,"mg/l"]
+                "Data_Format": "JSON",
+                "Data":{
+                    "species_A": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    },
+                    "species_B": {
+                        "1": ["all","all","all",0,"mg/l"]
+                    }
                 }
             }
         }
