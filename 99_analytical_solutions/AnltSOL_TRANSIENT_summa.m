@@ -13,7 +13,7 @@ function AnltSOL_TRANSIENT_summa
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
  
-test = 4; 
+test = 2; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General mdoel setup %%%%%%%%%%%%%%%%%%%%%

@@ -11,7 +11,7 @@ model_all = {'crhm',...
             'mizuroute'};
         
 tests_all = [9, 10, 11, 11.1, 12, 13];
-tests_all = 10;
+tests_all = 9;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start Processing

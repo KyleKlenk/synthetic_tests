@@ -8,15 +8,16 @@ outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scien
 
 % Runs to process
 model_all = {...'crhm',...
-            ...'summa',...
-            'mizuroute'};
+            'summa'...
+            ...'mizuroute'...
+            };
 % test = 2; % 2_nrTrans_instS_PorMedia
 % test = 4; % 4_nrTrans_contS_PorMedia
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
 % test = 14; % test_debug
-test = 13;
+test = 2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -27,7 +28,7 @@ extrData_flag = true;
 debugMode_flag = true;
 
 % Plot settings
-if test >= 0 % Batch tests
+if test >= 9 % Batch tests
     plot_TimeX_ConcY_perElement_flag = true;
     plot_ConcX_ZProfileY_perTime_flag = false;
 else % transport tests
@@ -54,11 +55,10 @@ for model_i = 1:numel(model_all)
     elseif model_name == "summa"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/case_studies/synthetic_tests';
-        %comptName = 'SCALARCANOPYWAT';
-        %comptName = 'RUNOFF';
-        comptName = 'ILAYERVOLFRACWAT_SOIL';
-        %comptName = 'SCALARAQUIFER';
-        test10_units = 'MG';
+        if (test >= 9); comptName = 'SCALARAQUIFER';
+        else; comptName = 'ILAYERVOLFRACWAT_SOIL';
+        end
+        test10_units = 'G';
      elseif model_name == "mizuroute"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/mizuRoute/case_studies/synthetic_tests';
@@ -70,18 +70,18 @@ for model_i = 1:numel(model_all)
         ix_request = 1;
         
         if test == 4 || test == 8 
-        tStart_sec = seconds([...
-                                60 * 60 * 24 * 15,...
-                                60 * 60 * 24 * 70,...
-                                60 * 60 * 24 * 120,...
-                                ]);
+            tStart_sec = seconds([...
+                60 * 60 * 24 * 15,...
+                60 * 60 * 24 * 70,...
+                60 * 60 * 24 * 120,...
+                ]);
         elseif test == 2 || test == 6 
             tStart_sec = seconds([...
-                                ...0,...
-                                60 * 60 * 24 * 55,...
-                                60 * 60 * 24 * 85,...
-                                60 * 60 * 24 * 120,...
-                                ]);
+                ...0,...
+                60 * 60 * 24 * 55,...
+                60 * 60 * 24 * 85,...
+                60 * 60 * 24 * 120,...
+                ]);
         end
         
     elseif model_name == "mizuroute" 

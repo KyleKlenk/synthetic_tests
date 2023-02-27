@@ -8,15 +8,16 @@ outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scien
 
 % Runs to process
 model_all = {...'crhm',...
-            'summa',...
-            'mizuroute'};
+            'summa'...
+            ...'mizuroute'...
+            };
 % test = 2; % 2_nrTrans_instS_PorMedia
 % test = 4; % 4_nrTrans_contS_PorMedia
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
 % test = 14; % test_debug
-test = 4;
+test = 9;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -26,6 +27,14 @@ test = 4;
 extrData_flag = true;
 debugMode_flag = true;
 
+% Plot settings
+if test >= 9 % Batch tests
+    plot_TimeX_ConcY_perElement_flag = true;
+    plot_ConcX_ZProfileY_perTime_flag = false;
+else % transport tests
+    plot_TimeX_ConcY_perElement_flag = false;
+    plot_ConcX_ZProfileY_perTime_flag = true;
+end
 
 openwq_noWaterConc_Val = -9999;
 
@@ -46,10 +55,9 @@ for model_i = 1:numel(model_all)
     elseif model_name == "summa"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/case_studies/synthetic_tests';
-        %comptName = 'SCALARCANOPYWAT';
-        %comptName = 'RUNOFF';
-        comptName = 'ILAYERVOLFRACWAT_SOIL';
-        %comptName = 'SCALARAQUIFER';
+        if (test >= 9); comptName = 'SCALARAQUIFER';
+        else; comptName = 'ILAYERVOLFRACWAT_SOIL';
+        end
         test10_units = 'MG';
      elseif model_name == "mizuroute"
         % summa
@@ -62,18 +70,18 @@ for model_i = 1:numel(model_all)
         ix_request = 1;
         
         if test == 4 || test == 8 
-        tStart_sec = seconds([...
-                                60 * 60 * 24 * 15,...
-                                60 * 60 * 24 * 70,...
-                                60 * 60 * 24 * 120,...
-                                ]);
+            tStart_sec = seconds([...
+                60 * 60 * 24 * 15,...
+                60 * 60 * 24 * 70,...
+                60 * 60 * 24 * 120,...
+                ]);
         elseif test == 2 || test == 6 
             tStart_sec = seconds([...
-                                ...0,...
-                                60 * 60 * 24 * 55,...
-                                60 * 60 * 24 * 85,...
-                                60 * 60 * 24 * 120,...
-                                ]);
+                ...0,...
+                60 * 60 * 24 * 55,...
+                60 * 60 * 24 * 85,...
+                60 * 60 * 24 * 120,...
+                ]);
         end
         
     elseif model_name == "mizuroute" 
@@ -128,10 +136,6 @@ for model_i = 1:numel(model_all)
     end
     
     if test == 2
-        
-        % Plot settings
-        plot_TimeX_ConcY_perElement_flag = false;
-        plot_ConcX_ZProfileY_perTime_flag = true;
 
         Synthetic_test = '2_nrTrans_instS_PorMedia';
 
@@ -142,10 +146,6 @@ for model_i = 1:numel(model_all)
             };
 
     elseif test == 4
-        
-        % Plot settings
-        plot_TimeX_ConcY_perElement_flag = false;
-        plot_ConcX_ZProfileY_perTime_flag = true;
 
         Synthetic_test = '4_nrTrans_contS_PorMedia';
         
@@ -172,10 +172,6 @@ for model_i = 1:numel(model_all)
         %                                         };
     
     elseif test == 6
-        
-        % Plot settings
-        plot_TimeX_ConcY_perElement_flag = false;
-        plot_ConcX_ZProfileY_perTime_flag = true;
 
     Synthetic_test = '6_nrTrans_instS_PorMedia_linDecay';
 
@@ -186,10 +182,6 @@ for model_i = 1:numel(model_all)
         };
         
     elseif test == 8
-        
-        % Plot settings
-        plot_TimeX_ConcY_perElement_flag = false;
-        plot_ConcX_ZProfileY_perTime_flag = true;
 
         Synthetic_test = '8_nrTrans_contS_PorMedia_linDecay';
         
@@ -203,16 +195,10 @@ for model_i = 1:numel(model_all)
             };
 
     elseif test == 9
-        
-        % Plot settings
-        plot_TimeX_ConcY_perElement_flag = true;
-        plot_ConcX_ZProfileY_perTime_flag = false;
-        
         Synthetic_test = '9_batch_singleSp_1storder';
 
         extractElm_info = {...
             strcat(comptName,'@SPECIES_A#MG'),[ix_request,1,1]
-            strcat(comptName,'@TIME_TRACK#MG'),[ix_request,1,1]
             };
 
     elseif test == 10
@@ -220,7 +206,6 @@ for model_i = 1:numel(model_all)
         
         extractElm_info = {...
             strcat(comptName,'@SPECIES_A#', test10_units),[ix_request,1,1]
-            strcat(comptName,'@SPECIES_B#', test10_units),[ix_request,1,1]
             };
 
     elseif test == 11

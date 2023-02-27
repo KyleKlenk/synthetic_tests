@@ -29,10 +29,7 @@ timeDays_travel_between_nodes = [120, 250, 370]; % days
 
 % Time steps
 if test == 4 || test == 8 
-    %x_request = [6430, 6753, 6893];
-    %x_dist_request = [1, 400, 500];
-    %x_dist_request = cumsum([80.348, 113.724, 134.015]); % km
-    %x_dist_request = [150]; %km
+
     start_day =  '2017-08-28 12:15:00';
     tsim_nDays_sinceStart = 1100; % time reachis nodes: 120, 250 and 370;
     
@@ -110,11 +107,7 @@ for x_reqi = 1:n_x_request
         Analytical_calc_1D_instS(tsim_i)
         
     end
-    %Analytical_calc_1D_2(tsim_i)
-    %Analytical_calc_1D_3(tsim_i)
-    %Analytical_calc_1D_justAdv(tsim_i, mLayerDepth_summa_m)
-    %Analytical_calc_2D
-    %Numerical_calc
+
     Compare_plot(dist_between_nodes,x_reqi,...
                  start_day)
     
