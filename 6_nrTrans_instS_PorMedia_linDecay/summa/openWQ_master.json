@@ -15,13 +15,7 @@
 				"LABEL": "Rainfall",
 				"FILEPATH": "openWQ_rainfall_1.json"
 			}
-		}//,
-		//"SINK_SOURCE": {
-		//	"1": {
-		//		"LABEL": "Load_1_test",
-		//		"FILEPATH": "openWQ_source_batchSimulations.json"
-		//	}
-		//}
+		}
 	},
 	"MODULES": {
 		"BIOGEOCHEMISTRY": {
