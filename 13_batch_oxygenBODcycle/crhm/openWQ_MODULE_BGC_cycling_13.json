@@ -26,7 +26,7 @@
             "2":{
                 "CONSUMED": "DEFICIT_OXYG",
                 "PRODUCED": "DO",
-                "KINETICS": ["DEFICIT_OXYG * k","1/day"],
+                "KINETICS": ["DEFICIT_OXYG * p","1/day"],
                 "PARAMETER_NAMES": ["p"],
                 "PARAMETER_VALUES":{
                     "p": 0.5
