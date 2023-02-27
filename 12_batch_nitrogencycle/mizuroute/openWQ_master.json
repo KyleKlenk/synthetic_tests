@@ -10,12 +10,6 @@
 	},
     "OPENWQ_INPUT": {
     	"CONFIG_FILEPATH": "openwq_in/openwq_CONFIG_mizu_12.json",
-    	"SINK_SOURCE": {
-    		"1": {
-    			"LABEL": "Load_test",
-    			"FILEPATH": "openwq_in/openwq_SOURCE_mizu.json"
-    		}
-		},
 		"EXTERNAL_WATER_FLUXES": {
 			"1": {
 				"LABEL": "Summa",

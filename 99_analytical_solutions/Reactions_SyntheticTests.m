@@ -6,12 +6,13 @@
 clear all
 
 % Configuration
-model_all = {'crhm',...
-            'summa',...
-            'mizuroute'};
+model_all = {'crhm'...,...
+            ...'summa',...
+            ...'mizuroute'
+            };
         
 tests_all = [9, 10, 11, 11.1, 12, 13];
-tests_all = 9;
+tests_all = 13;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start Processing

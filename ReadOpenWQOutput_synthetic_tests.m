@@ -7,8 +7,8 @@
 outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/synthTestT_results';
 
 % Runs to process
-model_all = {...'crhm',...
-            'summa'...
+model_all = {'crhm'...
+            ...'summa'...
             ...'mizuroute'...
             };
 % test = 2; % 2_nrTrans_instS_PorMedia
@@ -17,7 +17,7 @@ model_all = {...'crhm',...
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
 % test = 14; % test_debug
-test = 2;
+test = 13;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -49,22 +49,22 @@ for model_i = 1:numel(model_all)
     
     if model_name == "crhm"
         % crhm
-        results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/case_studies/Case_Studies/synthetic_tests';  
+        results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/code_crhm/case_studies/synthetic_tests';  
         comptName = 'SOIL_RECHR';
-        test10_units = 'MG';
+        
     elseif model_name == "summa"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/Summa-openWQ/case_studies/synthetic_tests';
         if (test >= 9); comptName = 'SCALARAQUIFER';
         else; comptName = 'ILAYERVOLFRACWAT_SOIL';
         end
-        test10_units = 'G';
      elseif model_name == "mizuroute"
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/mizuRoute/case_studies/synthetic_tests';
         comptName = 'RIVER_NETWORK_REACHES';
-        test10_units = 'G';
     end
+    
+    test10_units = 'G';
     
     if model_name == "crhm" || model_name == "summa" 
         ix_request = 1;
