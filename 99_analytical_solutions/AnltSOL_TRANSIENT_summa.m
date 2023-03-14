@@ -13,7 +13,7 @@ function AnltSOL_TRANSIENT_summa
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
  
-test = 9; 
+test = 2; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General mdoel setup %%%%%%%%%%%%%%%%%%%%%
@@ -111,11 +111,7 @@ for ti = 1:n_ti
         Analytical_calc_1D_instS(tsim_i)
         
     end
-    %Analytical_calc_1D_2(tsim_i)
-    %Analytical_calc_1D_3(tsim_i)
-    %Analytical_calc_1D_justAdv(tsim_i, mLayerDepth_summa_m)
-    %Analytical_calc_2D
-    %Numerical_calc
+
     Compare_plot(ti, n_ti, tsim_i,mLayerDepth_summa_mm)
     
 end

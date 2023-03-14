@@ -7,9 +7,9 @@
 outputFolder = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/synthTestT_results';
 
 % Runs to process
-model_all = {'crhm'...
+model_all = {...'crhm'...
             ...'summa'...
-            ...'mizuroute'...
+            'mizuroute'...
             };
 % test = 2; % 2_nrTrans_instS_PorMedia
 % test = 4; % 4_nrTrans_contS_PorMedia
@@ -17,7 +17,7 @@ model_all = {'crhm'...
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
 % test = 9, 10, 11, 11.1 12, 13 % chemistry
 % test = 14; % test_debug
-test = 13;
+test = 2;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SETTINGS
@@ -28,7 +28,7 @@ extrData_flag = true;
 debugMode_flag = true;
 
 % Plot settings
-if test >= 9 % Batch tests
+if test >= 9
     plot_TimeX_ConcY_perElement_flag = true;
     plot_ConcX_ZProfileY_perTime_flag = false;
 else % transport tests
@@ -62,6 +62,8 @@ for model_i = 1:numel(model_all)
         % summa
         results_dir = '/Users/diogocosta/Library/CloudStorage/OneDrive-impactblue-scientific.com/6_Projects/1_GWF/2_WIP/code/mizuRoute/case_studies/synthetic_tests';
         comptName = 'RIVER_NETWORK_REACHES';
+        plot_TimeX_ConcY_perElement_flag = true;
+        plot_ConcX_ZProfileY_perTime_flag = false;
     end
     
     test10_units = 'G';
@@ -138,12 +140,22 @@ for model_i = 1:numel(model_all)
     if test == 2
 
         Synthetic_test = '2_nrTrans_instS_PorMedia';
+        
+        if model_name == "summa" 
 
-        extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
-                                                 repelem(1,100);
-                                                 1:100]';
-            };
+            extractElm_info = {...
+                strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                                     repelem(1,100);
+                                                     1:100]';
+                };
+            
+        elseif model_name == "mizuroute"
+        
+            extractElm_info = {...
+                strcat(comptName,'@SPECIES_A#MG|L'),[[6567,6724,6893];...
+                                                    repelem(1,3);...
+                                                    repelem(1,3)]';};
+        end
 
     elseif test == 4
 
@@ -185,14 +197,23 @@ for model_i = 1:numel(model_all)
 
         Synthetic_test = '8_nrTrans_contS_PorMedia_linDecay';
         
-        extractElm_info = {...
-            strcat(comptName,'@SPECIES_A#MG|L'),[[6567,6724,6893];...
-                                                repelem(1,3);...
-                                                repelem(1,3)]';
-            strcat(comptName,'@time_track#MG|L'),[[6567,6724,6893];...
-                                                repelem(1,3);...
-                                                repelem(1,3)]';
-            };
+        if model_name == "mizuroute" 
+        
+            extractElm_info = {...
+                strcat(comptName,'@SPECIES_A#MG|L'),[[6567,6724,6893];...
+                                                    repelem(1,3);...
+                                                    repelem(1,3)]';
+                strcat(comptName,'@time_track#MG|L'),[[6567,6724,6893];...
+                                                    repelem(1,3);...
+                                                    repelem(1,3)]';
+                };
+        else % summa and chrm
+             extractElm_info = {...
+        strcat(comptName,'@SPECIES_A#MG|L'),[repelem(1,100);
+                                             repelem(1,100);
+                                             1:100]';
+        };
+        end
 
     elseif test == 9
         Synthetic_test = '9_batch_singleSp_1storder';

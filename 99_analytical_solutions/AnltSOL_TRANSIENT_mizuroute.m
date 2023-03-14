@@ -13,7 +13,7 @@ function AnltSOL_TRANSIENT_mizuroute
 % test = 6; % 6_nrTrans_instS_PorMedia_linDecay
 % test = 8; % 8_nrTrans_contS_PorMedia_linDecay
  
-test = 8; 
+test = 2; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % General mdoel setup %%%%%%%%%%%%%%%%%%%%%
@@ -41,11 +41,15 @@ if test == 4 || test == 8
     Dy = mean(V_kmday)*0.5;
 
 elseif test == 2 || test == 6 
-    tsim = [...
-            60 * 60 * 24 * 55,...
-            60 * 60 * 24 * 85,...
-            60 * 60 * 24 * 120,...
-            ];
+    start_day =  '2017-08-28 12:15:00';
+    tsim_nDays_sinceStart = 1100; % time reachis nodes: 120, 250 and 370;
+    
+    if test == 2
+        timeDays_travel_between_nodes = timeDays_travel_between_nodes - 20; % days
+    end
+    
+    V_kmday = dist_between_nodes ./ (timeDays_travel_between_nodes);
+    Dy = mean(V_kmday)*0.5;
 end
 
 % Storing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,9 +87,12 @@ for x_reqi = 1:n_x_request
         mLayerVolFracLiq = [0.2007, 0.2014, 0.2020, 0.2027, 0.2034, 0.2041, 0.2048, 0.2055, 0.2063, 0.2070, 0.2077, 0.2085, 0.2093, 0.2101, 0.2109, 0.2117, 0.2125, 0.2133, 0.2141, 0.2150, 0.2159, 0.2167, 0.2176, 0.2185, 0.2194, 0.2204, 0.2213, 0.2223, 0.2232, 0.2242, 0.2252, 0.2262, 0.2272, 0.2283, 0.2293, 0.2304, 0.2315, 0.2326, 0.2337, 0.2348, 0.2360, 0.2372, 0.2384, 0.2396, 0.2408, 0.2420, 0.2433, 0.2446, 0.2459, 0.2472, 0.2485, 0.2499, 0.2513, 0.2527, 0.2541, 0.2555, 0.2570, 0.2584, 0.2599, 0.2615, 0.2630, 0.2646, 0.2662, 0.2678, 0.2694, 0.2711, 0.2727, 0.2744, 0.2761, 0.2779, 0.2796, 0.2814, 0.2832, 0.2850, 0.2869, 0.2888, 0.2906, 0.2925, 0.2945, 0.2964, 0.2984, 0.3003, 0.3023, 0.3043, 0.3063, 0.3083, 0.3104, 0.3124, 0.3145, 0.3165, 0.3186, 0.3206, 0.3227, 0.3247, 0.3268, 0.3288, 0.3308, 0.3328, 0.3348, 0.3368];
         hru_area_m2      = 32700;
         
+        mLayerDepth_summa_m = 0.06;
         mLayerVolFracWat_summa_m3 = mLayerVolFracLiq * hru_area_m2 * mLayerDepth_summa_m;
         mLayerVolFracWat_summa_mm_m2 = mLayerVolFracLiq * hru_area_m2 * mLayerDepth_summa_m * 1000;
         UpLayVol_mm_m2 = mLayerVolFracWat_summa_m3 * 1000; % to mm*m2
+        
+        iLayerLiqFluxSoil_summa_m_s = 0.5;
         
         iLayerLiqFluxSoil_summa_mm_s = iLayerLiqFluxSoil_summa_m_s * 1000;
         
@@ -104,7 +111,7 @@ for x_reqi = 1:n_x_request
         save InputData storage;
         
         % Call analytical solver
-        Analytical_calc_1D_instS(tsim_i)
+        Analytical_calc_1D_instS(dist_between_nodes,x_reqi,tsim_nDays_sinceStart)
         
     end
 
@@ -362,8 +369,9 @@ save AnalytSOL storage;
 % USGS Chapter B7
 % ANALYTICAL SOLUTIONS FOR ONE-, TWO-, AND THREE-DIMENSIONAL SOLUTE
 %TRANSPORT IN GROUND-WATER SYSTEMS WITH UNIFORM FLOW
-function Analytical_calc_1D_instS(tsim_i)
+function Analytical_calc_1D_instS(dist_between_nodes,x_reqi,tsim_nDays_sinceStart)
 
+%{
 load InputData storage
 M = storage.M;
 UpLayVol_mm_m2 = storage.UpLayVol_mm_m2;
@@ -371,7 +379,7 @@ mLayerVolFracLiq = storage.mLayerVolFracLiq;
 Dy = storage.Dy;
 r = storage.r;
 V_kmday = storage.V_kmday;
-ny = storage.ny;
+%ny = storage.ny;
 hru_area_m2 = storage.hru_area_m2;
 mLayerDepth_summa_mm = storage.mLayerDepth_summa_mm;
 iLayerLiqFluxSoil_summa_mm_s = storage.iLayerLiqFluxSoil_summa_mm_s;
@@ -407,9 +415,36 @@ Cfinal=zeros(1,ny);
 
 h=waitbar(0,'ANALYTICAL solution: calculating...');
 
-for y=1:ny
+%for y=1:ny
     
-    waitbar(y/ny)
+%}
+    
+load InputData storage
+%C0=storage.C0;
+Dy=storage.Dy;
+r=storage.r;
+V_kmday=storage.V_kmday;
+
+Cfinal=zeros(1,tsim_nDays_sinceStart);
+
+x_request_i = dist_between_nodes(x_reqi);
+
+V = V_kmday(x_reqi);
+V = mean(V_kmday);
+
+n = 1;
+
+M_unitVol = 3;
+
+h=waitbar(0,'ANALYTICAL solution: calculating...');
+
+for t_i=1:tsim_nDays_sinceStart
+    waitbar(t_i/tsim_nDays_sinceStart)
+    
+    % Days since start (in seconds)
+    tsim_i = t_i;
+    
+    waitbar(t_i/tsim_nDays_sinceStart)
 
     % calculation of A
 
@@ -418,36 +453,26 @@ for y=1:ny
 
     % calculation of B
     B = exp(...
-            V*(y-Yc)/ ...
+            V*(x_request_i)/ ...
             (2*Dy));
 
     D = exp( ...
             -( V^2 / (4*Dy) + r) * tsim_i ...
-            -( (y-Yc)^2 ./ (4 * Dy * tsim_i))) ;
+            -( (x_request_i)^2 ./ (4 * Dy * tsim_i))) ;
 
     % Final calculation
     C = A * B * D;
 
     % Saving results
-    Cfinal(1,y) = C;
+    Cfinal(1,t_i) = C;
    
 end
 close(h)
 
-% Get the effect of dilution because of different layer volumes
-% 1) Using cubic spline to extrapolate for all sub-layers because the
-% analytical solution has 1 mm of resolution, while the model has 6 mm
-mLayerVolFracLiq_interp = spline(...
-    1:6:600,...
-    mLayerVolFracLiq,...
-    1:1:600);
-%figure;plot(mLayerVolFracLiq_interp^0.5,[1:1:600]/1000); set(gca,"Ydir","reverse"); set(gca,"Xdir","reverse");
-
-Cfinal_corr = Cfinal * mLayerVolFracLiq_interp(1) ./ mLayerVolFracLiq_interp;
 
 disp('Analytical solution calculation: OK')
 
-storage.C_analytical = Cfinal_corr';
+storage.C_analytical = Cfinal';
 save AnalytSOL storage;
 
 function Analytical_calc_2D
