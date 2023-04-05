@@ -35,7 +35,9 @@
 		"UNITS": "mg/l",
 		"NO_WATER_CONC_FLAG": -9999, // only accepts integers
 		"COMPARTMENTS_AND_CELLS": {
-			"ILAYERVOLFRACWAT_SOIL": "all"
+			"ILAYERVOLFRACWAT_SOIL": {
+				"1": ["all","all","all"]
+			}
 		},
 		"TIMESTEP": [1, "day"]
 	}

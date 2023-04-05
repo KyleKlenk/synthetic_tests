@@ -45,7 +45,9 @@
 			//	"1": [1, 1, 1]
 			//},
 			//"RUNOFF": "all",
-			"ILAYERVOLFRACWAT_SOIL": "all"
+			"ILAYERVOLFRACWAT_SOIL":{
+				"1": ["all","all","all"]
+			}
 			//"ILAYERVOLFRACWAT_SOIL": {
 			//	"1": [1, 1, 1],
 			//	"2": [1, 1, 5],
