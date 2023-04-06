@@ -22,7 +22,7 @@
 		}
 	},
 	"OPENWQ_OUTPUT": {
-		"RESULTS_FOLDERPATH": "Output_OpenWQ_13",
+		"RESULTS_FOLDERPATH": "Output_OpenWQ_13_Reference",
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["BOD","DEFICIT_OXYG","DO"],
 		"UNITS":"mg",
