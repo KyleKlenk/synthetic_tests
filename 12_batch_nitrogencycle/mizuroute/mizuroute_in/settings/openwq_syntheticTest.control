@@ -8,9 +8,9 @@
 ! ****************************************************************************************************************************
 ! DEFINE DIRECTORIES 
 ! --------------------------
-<ancil_dir>         ./mizuroute_in/ancillary_data/                         ! directory containing ancillary data (river network, remapping netCDF) 
-<input_dir>         ./mizuroute_in/input/                                  ! directory containing input data (runoff netCDF) 
-<output_dir>        ./mizuroute_out/                                 ! directory containing output data
+<ancil_dir>         /code/synthetic_tests/12_batch_nitrogencycle/mizuroute/mizuroute_in/ancillary_data/                         ! directory containing ancillary data (river network, remapping netCDF) 
+<input_dir>         /code/synthetic_tests/12_batch_nitrogencycle/mizuroute/mizuroute_in/input/                                  ! directory containing input data (runoff netCDF) 
+<output_dir>        /code/synthetic_tests/12_batch_nitrogencycle/mizuroute/mizuroute_out/                                 ! directory containing output data
 ! ****************************************************************************************************************************
 ! DEFINE TIME PERIOD OF THE SIMULATION
 ! --------------------------------------------

@@ -43,6 +43,6 @@ def compare_hdf5_files(dir1, dir2):
 
 # Example usage:
 if __name__ == '__main__':
-    dir1 = '/code/case_studies/Output_OpenWQ_13/HDF5'
-    dir2 = '/code/case_studies/Output_OpenWQ_13_Reference/HDF5'
+    dir1 = '/code/case_studies/testCase_cameo_v1.2/bin/Output_OpenWQ/HDF5'
+    dir2 = '/code/case_studies/testCase_cameo_v1.2/bin/Output_OpenWQ_test/HDF5'
     compare_hdf5_files(dir1, dir2)
