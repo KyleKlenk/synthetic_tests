@@ -43,6 +43,52 @@ def compare_hdf5_files(dir1, dir2):
 
 # Example usage:
 if __name__ == '__main__':
-    dir1 = '/code/case_studies/testCase_cameo_v1.2/bin/Output_OpenWQ/HDF5'
-    dir2 = '/code/case_studies/testCase_cameo_v1.2/bin/Output_OpenWQ_test/HDF5'
+    # Compare 2_nrTrans_instS_PorMedia
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_2_comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_2_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+    
+    # Compare 4_nrTrans_contS_PorMedia
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_4_comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_4_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+
+    # Compare 6_nrTrans_instS_PorMedia_linDecay
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_6_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_6_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+    
+    # Compare 8_nrTrans_contS_PorMedia_linDecay
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_8_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_8_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+
+    # Compare 9_batch_singleSp_1storder
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_9_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_9_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+
+    # Compare 10_batch_singleSp_2ndorder
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_10_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_10_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+    
+    # Compare 11_1_batch_3species
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_11_1_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_11_1_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+
+    # Compare 11_batch_2species
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_11_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_11_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+
+    # Compare 12_batch_nitrogencycle
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_12_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_12_Ref/HDF5'
+    compare_hdf5_files(dir1, dir2)
+    
+    # Compare 13_batch_oxygenBODcycle
+    dir1 = '/home/kck540/OpenWQ-Projects/Chris_Files/Summa-openWQ/bin/Output_OpenWQ_13_Comp/HDF5'
+    dir2 = '/home/kck540/OpenWQ-Projects/OpenWQ_Reference_Setup/Summa-openWQ/bin/Output_OpenWQ_13_Ref/HDF5'
     compare_hdf5_files(dir1, dir2)
