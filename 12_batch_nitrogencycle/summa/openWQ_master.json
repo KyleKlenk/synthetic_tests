@@ -22,7 +22,7 @@
 		}
 	},
 	"OPENWQ_OUTPUT": {
-		"RESULTS_FOLDERPATH": "Output_OpenWQ_12_Comp",
+		"RESULTS_FOLDERPATH": "/code/output/openwq/openwq_12",
         "FORMAT": "HDF5", // HDF5, CSV
         "CHEMICAL_SPECIES":["Nref","Nlab","DIN","DON"],
 		"UNITS":"mg",

@@ -4,7 +4,7 @@ simEndTime           '2019-12-20 13:45' !
 tmZoneInfo           'localTime' ! 
 settingsPath         '/code/synthetic_tests/9_batch_singleSp_1storder/summa/summa/SUMMA/' !  setting_path
 forcingPath          '/code/synthetic_tests/9_batch_singleSp_1storder/summa/summa/forcing_data/' !  input_path
-outputPath           '/code/synthetic_tests/9_batch_singleSp_1storder/summa/summa/output/' ! 
+outputPath           '/code/output/summa/openwq_9/' ! 
 decisionsFile        'summa_zDecisions_OpenWQ_systheticTests_BGQ.txt' !  decision
 outputControlFile    'Model_Output.txt' !  OUTPUT_CONTROL
 globalHruParamFile   'summa_zLocalParamInfo.txt' !  local_par

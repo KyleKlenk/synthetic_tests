@@ -29,7 +29,7 @@
 		}
 	},
 	"OPENWQ_OUTPUT": {
-		"RESULTS_FOLDERPATH": "Output_OpenWQ_6_Ref",
+		"RESULTS_FOLDERPATH": "/code/output/openwq/openwq_6",
 		"FORMAT": "HDF5", // HDF5, CSV (VTK has been disabled)
 		"CHEMICAL_SPECIES": ["species_A", "species_B"],
 		"UNITS": "mg/l",
